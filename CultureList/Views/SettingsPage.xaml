@@ -78,16 +78,15 @@
                         <!--#region Row definitions-->
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30" />
+                            <RowDefinition Height="15" />
                             <RowDefinition Height="30" />
                             <RowDefinition Height="30" />
                             <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
+
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="45" />
                             <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="10" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <!--#endregion-->
@@ -95,24 +94,24 @@
                         <Label Grid.Row="0" Grid.Column="1"
                                VerticalAlignment="Center"
                                Content="Cultures to Display" />
-                        <ComboBox Grid.Row="0" Grid.Column="3"
-                                  Width="Auto" MinWidth="200"
+                        <ComboBox Grid.Row="0" Grid.Column="2"
+                                  Width="Auto" MinWidth="150"
                                   Margin="4,3,0,0" Padding="2,0,0,3"
                                   HorizontalAlignment="Left"
                                   ItemsSource="{Binding Source={convert:EnumBindingSource {x:Type models:Cultures}}}"
                                   SelectedItem="{Binding SelectedCultures,
                                                          Source={x:Static config:UserSettings.Setting}}" />
-                        <RadioButton Grid.Row="1" Grid.Column="1"
+                        <RadioButton Grid.Row="2" Grid.Column="1"
                                   Padding="10,0"
                                   Content="{DynamicResource SettingsItem_ShowDisplayName}"
                                   IsChecked="{Binding ShowDisplayName,
                                                       Source={x:Static config:UserSettings.Setting}}" />
-                        <RadioButton Grid.Row="2" Grid.Column="1"
+                        <RadioButton Grid.Row="3" Grid.Column="1"
                                   Padding="10,0"
                                   Content="{DynamicResource SettingsItem_ShowEnglishName}"
                                   IsChecked="{Binding ShowEnglishName,
                                                       Source={x:Static config:UserSettings.Setting}}" />
-                        <RadioButton Grid.Row="3" Grid.Column="1"
+                        <RadioButton Grid.Row="4" Grid.Column="1"
                                   Padding="10,0"
                                   Content="{DynamicResource SettingsItem_ShowNativeName}"
                                   IsChecked="{Binding ShowNativeName,
