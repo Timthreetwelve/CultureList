@@ -1,0 +1,201 @@
+﻿<Window x:Class="CultureList.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:config="clr-namespace:CultureList.Configuration"
+        xmlns:convert="clr-namespace:CultureList.Converters"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:CultureList.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Width="800" Height="450"
+        Style="{StaticResource MaterialDesignWindow}"
+        TextElement.FontWeight="Regular"
+        TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Topmost="{Binding KeepOnTop,
+                          Source={x:Static config:UserSettings.Setting}}">
+
+    <!--#region DataContext & Resources-->
+    <Window.DataContext>
+        <viewmodels:NavigationViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <convert:SelectedItemConverter x:Key="SelItemConv" />
+    </Window.Resources>
+    <!--#endregion-->
+
+    <!--#region Interaction Triggers-->
+    <bh:Interaction.Triggers>
+        <bh:EventTrigger EventName="KeyDown">
+            <bh:InvokeCommandAction Command="{Binding KeyDownCommand}"
+                                    PassEventArgsToCommand="True" />
+        </bh:EventTrigger>
+        <bh:EventTrigger EventName="MouseRightButtonUp">
+            <bh:InvokeCommandAction Command="{Binding RightMouseUpCommand}"
+                                    PassEventArgsToCommand="True" />
+        </bh:EventTrigger>
+    </bh:Interaction.Triggers>
+    <!--#endregion-->
+
+    <Grid x:Name="MainGrid">
+        <!--#region Row definitions-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!--#endregion-->
+
+        <!--#region Title Row-->
+        <Grid Grid.Column="1">
+            <!--#region Column definitions for the title row-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+            <!--#endregion-->
+
+            <!--#region Page title label-->
+            <Label x:Name="PageTitle"
+                   Grid.Column="0"
+                   Margin="10,0" HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Content="{Binding PageTitle}"
+                   FontSize="22" FontWeight="SemiBold" />
+            <!--#endregion-->
+
+            <!--#region SnackBar-->
+            <materialDesign:Snackbar x:Name="SnackBar1"
+                                     Grid.Column="0"
+                                     HorizontalAlignment="Right"
+                                     VerticalAlignment="Top"
+                                     Background="{DynamicResource MaterialDesign.Brush.Background}"
+                                     Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
+                                     IsTabStop="False"
+                                     MessageQueue="{materialDesign:MessageQueue}" />
+            <!--#endregion-->
+
+            <!--#region PopupBox in button-->
+            <Button Grid.Column="2"
+                    Width="40"
+                    Margin="0,0,5,0" Padding="0"
+                    HorizontalAlignment="Right"
+                    Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
+                    IsDefault="False" IsTabStop="False"
+                    Style="{StaticResource MaterialDesignFlatButton}">
+                <materialDesign:PopupBox Padding="0" HorizontalAlignment="Right"
+                                         Focusable="False"
+                                         PlacementMode="LeftAndAlignTopEdges"
+                                         Style="{DynamicResource MaterialDesignPopupBox}"
+                                         ToolTip="{DynamicResource Button_ThreeDotToolTip}">
+                    <materialDesign:PopupBox.ToggleContent>
+                        <materialDesign:PackIcon Width="45" Height="28"
+                                                 Foreground="{Binding ElementName=PageTitle,
+                                                                      Path=Foreground}"
+                                                 Kind="DotsHorizontal" />
+                    </materialDesign:PopupBox.ToggleContent>
+                    <Border Padding="3"
+                            BorderBrush="{DynamicResource MaterialDesign.Brush.TextBox.HoverBackground}"
+                            BorderThickness="2">
+                        <Grid Width="auto">
+                            <StackPanel Orientation="Vertical">
+                                <Button Height="35"
+                                        Padding="15,1,15,22"
+                                        Command="{Binding ViewLogFileCommand}"
+                                        Content="{DynamicResource Button_OpenLogFile}"
+                                        ToolTip="{DynamicResource Button_OpenLogFileToolTip}" />
+                                <Button Height="35"
+                                        Padding="15,1,15,22"
+                                        Command="{Binding OpenAppFolderCommand}"
+                                        Content="{DynamicResource Button_OpenFolder}"
+                                        ToolTip="{DynamicResource Button_OpenFolderToolTip}" />
+                                <Separator Margin="0" Padding="1"
+                                           Background="{DynamicResource MaterialDesign.Brush.TextBox.HoverBackground}" />
+                                <Button Height="35"
+                                        Padding="15,1,15,22"
+                                        Command="{Binding ViewReadMeFileCommand}"
+                                        Content="{DynamicResource About_DocumentationText}"
+                                        ToolTip="{DynamicResource About_DocumentationToolTip}" />
+                                <Separator Margin="0" Padding="1"
+                                           Background="{DynamicResource MaterialDesign.Brush.TextBox.HoverBackground}" />
+                                <Button Height="35"
+                                        Padding="15,1,15,22"
+                                        Content="{DynamicResource Button_Close}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </materialDesign:PopupBox>
+            </Button>
+            <!--#endregion-->
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Navigation Listbox-->
+        <ListBox x:Name="NavigationListBox"
+                 Grid.Row="0" Grid.RowSpan="2"
+                 Grid.Column="0"
+                 Margin="5,5,5,0"
+                 ItemsSource="{Binding NavigationViewModelTypes}"
+                 SelectedItem="{Binding NavItem,
+                                        Mode=OneWay,
+                                        Converter={StaticResource SelItemConv}}"
+                 Style="{StaticResource MaterialDesignNavigationListBox}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Style="{StaticResource NavItemIndicator}" />
+                        <materialDesign:PackIcon Width="auto" Height="auto"
+                                                 VerticalAlignment="Center"
+                                                 Kind="{Binding IconKind}" />
+                        <TextBlock Margin="15,0" VerticalAlignment="Center"
+                                   FontSize="14"
+                                   Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem"
+                       BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsExit}" Value="True" />
+                                <Condition Binding="{Binding Source={x:Static config:UserSettings.Setting}, Path=ShowExitInNav}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <bh:Interaction.Triggers>
+                <bh:EventTrigger EventName="SelectionChanged">
+                    <bh:InvokeCommandAction Command="{Binding NavigateCommand}"
+                                            CommandParameter="{Binding Path=SelectedItem,
+                                                                       RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" />
+                </bh:EventTrigger>
+            </bh:Interaction.Triggers>
+        </ListBox>
+        <!--#endregion-->
+
+        <!--#region Content control for pages-->
+        <Grid Grid.Row="1" Grid.RowSpan="2"
+              Grid.Column="1"
+              Background="{DynamicResource MaterialDesign.Brush.Card.Background}">
+            <ContentControl Content="{Binding CurrentViewModel}" />
+        </Grid>
+        <!--#endregion-->
+
+
+
+    </Grid>
+</Window>
+ 
