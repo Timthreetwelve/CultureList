@@ -68,24 +68,24 @@
     <sys:String x:Key="DataGridHeader_NativeName">Native Name</sys:String>
     <sys:String x:Key="DataGridHeader_TimeFormat">Time Format</sys:String>
      <!--  Details Pane  -->
-    <sys:String x:Key="Details_AmDesignator">AM Designator:</sys:String>
-    <sys:String x:Key="Details_DecimalSeparator">Number Decimal Separator:</sys:String>
-    <sys:String x:Key="Details_DisplayName">Display Name:</sys:String>
-    <sys:String x:Key="Details_EnglishName">English Name:</sys:String>
-    <sys:String x:Key="Details_FirstDayOfWeek">First Day of Week:</sys:String>
-    <sys:String x:Key="Details_IeftTag">IEFT Language Tag:</sys:String>
-    <sys:String x:Key="Details_LanguageCode">Language Code:</sys:String>
-    <sys:String x:Key="Details_Lcid">Language Culture Identifier (LCID):</sys:String>
-    <sys:String x:Key="Details_LongDatePattern">Long Date Pattern:</sys:String>
-    <sys:String x:Key="Details_LongTimePattern">Long Time Pattern:</sys:String>
-    <sys:String x:Key="Details_NativeName">Native Name:</sys:String>
-    <sys:String x:Key="Details_NumberGroupSeparator">Number Group Separator:</sys:String>
-    <sys:String x:Key="Details_PmDesignator">PM Designator:</sys:String>
-    <sys:String x:Key="Details_ShortDatePattern">Short Date Pattern:</sys:String>
-    <sys:String x:Key="Details_ShortTimePattern">Short Time Pattern:</sys:String>
-    <sys:String x:Key="Details_ThreeLetterIsoLanguage">Three Letter ISO Language Code:</sys:String>
-    <sys:String x:Key="Details_ThreeLetterWindowsName">Three Letter Windows Language Code:</sys:String>
-    <sys:String x:Key="Details_TwoLetterIsoLanguage">Two Letter ISO Language Code:</sys:String>
+    <sys:String x:Key="Details_AmDesignator">AM Designator</sys:String>
+    <sys:String x:Key="Details_DecimalSeparator">Number Decimal Separator</sys:String>
+    <sys:String x:Key="Details_DisplayName">Display Name</sys:String>
+    <sys:String x:Key="Details_EnglishName">English Name</sys:String>
+    <sys:String x:Key="Details_FirstDayOfWeek">First Day of Week</sys:String>
+    <sys:String x:Key="Details_IeftTag">IEFT Language Tag</sys:String>
+    <sys:String x:Key="Details_LanguageCode">Language Code</sys:String>
+    <sys:String x:Key="Details_Lcid">Language Culture Identifier (LCID)</sys:String>
+    <sys:String x:Key="Details_LongDatePattern">Long Date Pattern</sys:String>
+    <sys:String x:Key="Details_LongTimePattern">Long Time Pattern</sys:String>
+    <sys:String x:Key="Details_NativeName">Native Name</sys:String>
+    <sys:String x:Key="Details_NumberGroupSeparator">Number Group Separator</sys:String>
+    <sys:String x:Key="Details_PmDesignator">PM Designator</sys:String>
+    <sys:String x:Key="Details_ShortDatePattern">Short Date Pattern</sys:String>
+    <sys:String x:Key="Details_ShortTimePattern">Short Time Pattern</sys:String>
+    <sys:String x:Key="Details_ThreeLetterIsoLanguage">Three Letter ISO Language Code</sys:String>
+    <sys:String x:Key="Details_ThreeLetterWindowsName">Three Letter Windows Language Code</sys:String>
+    <sys:String x:Key="Details_TwoLetterIsoLanguage">Two Letter ISO Language Code</sys:String>
     <!--  Filter Box Hint Text  -->
     <sys:String x:Key="FilterHint">Filter</sys:String>
     <!--  Text found in messages (log, message box, status bar, details area, etc.)  -->
