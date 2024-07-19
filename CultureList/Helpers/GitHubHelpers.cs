@@ -12,6 +12,10 @@ internal static class GitHubHelpers
     private static readonly MainWindow? _mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
     #endregion MainWindow Instance
 
+    #region Properties
+    public static string? ExceptionText { get; set; }
+    #endregion Properties
+
     #region Check for newer release
     /// <summary>
     /// Checks to see if a newer release is available.
@@ -23,11 +27,18 @@ internal static class GitHubHelpers
     public static async Task CheckRelease()
     {
         SnackbarMsg.ClearAndQueueMessage(GetStringResource("MsgText_AppUpdateChecking"));
-        Release release = await GetLatestReleaseAsync(AppConstString.RepoOwner, AppConstString.RepoName);
+        Release? release = await GetLatestReleaseAsync(AppConstString.RepoOwner, AppConstString.RepoName);
+
+        if (release == null)
+        {
+            CheckFailed();
+            return;
+        }
 
         string tag = release.TagName;
         if (string.IsNullOrEmpty(tag))
         {
+            ExceptionText = GetStringResource("MsgText_AppUpdateTagNotFound");
             CheckFailed();
             return;
         }
@@ -46,7 +57,7 @@ internal static class GitHubHelpers
             string msg = GetStringResource("MsgText_AppUpdateNoneFound");
             _log.Debug(msg);
             _ = new MDCustMsgBox(msg,
-                "CultureList",
+                "Culture List",
                 ButtonType.Ok,
                 false,
                 true,
@@ -56,7 +67,9 @@ internal static class GitHubHelpers
         {
             string msg = string.Format(GetStringResource("MsgText_AppUpdateNewerFound"), latestVersion);
             _log.Debug(msg);
-            _ = new MDCustMsgBox($"{msg}\n\n{GetStringResource("MsgText_AppUpdateGoToRelease")}\n",
+            _ = new MDCustMsgBox($"{msg}\n\n" +
+                            $"{GetStringResource("MsgText_AppUpdateGoToRelease")}\n\n" +
+                            $"{GetStringResource("MsgText_AppUpdateCloseApp")}",
                 "Culture List",
                 ButtonType.YesNo,
                 false,
@@ -71,6 +84,7 @@ internal static class GitHubHelpers
                 p.StartInfo.FileName = url;
                 p.StartInfo.UseShellExecute = true;
                 p.Start();
+                System.Windows.Application.Current.Shutdown();
             }
         }
     }
@@ -92,8 +106,15 @@ internal static class GitHubHelpers
         {
             return await client.Repository.Release.GetLatest(repoOwner, repoName);
         }
+        catch (NotFoundException ex)
+        {
+            ExceptionText = ex.Message;
+            _log.Error(ex, "Release not found on GitHub.");
+            return null!;
+        }
         catch (Exception ex)
         {
+            ExceptionText = ex.Message;
             _log.Error(ex, "Get latest release from GitHub failed.");
             return null!;
         }
@@ -106,8 +127,9 @@ internal static class GitHubHelpers
     /// </summary>
     private static void CheckFailed()
     {
-        _ = new MDCustMsgBox(GetStringResource("MsgText_AppUpdateCheckFailed"),
-            "Culture List",
+        string msg = $"{ExceptionText}\n\n{GetStringResource("MsgText_AppUpdateCheckFailed")}";
+        _ = new MDCustMsgBox(msg,
+            GetStringResource("MsgText_ErrorCaption"),
             ButtonType.Ok,
             false,
             true,
