@@ -59,7 +59,7 @@
             <!--#region Column definitions for the title row-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="250" />
                 <ColumnDefinition Width="40" />
             </Grid.ColumnDefinitions>
             <!--#endregion-->
@@ -71,6 +71,16 @@
                    VerticalAlignment="Center"
                    Content="{Binding PageTitle}"
                    FontSize="22" FontWeight="SemiBold" />
+            <!--#endregion-->
+
+            <!--#region Selected cultures label-->
+            <Label Grid.Column="1"
+                   Margin="15,0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Content="{Binding SelectedCultures,
+                                     Source={x:Static config:UserSettings.Setting}}"
+                   FontSize="14"  />
             <!--#endregion-->
 
             <!--#region SnackBar-->
@@ -201,4 +211,3 @@
 
     </Grid>
 </Window>
- 
