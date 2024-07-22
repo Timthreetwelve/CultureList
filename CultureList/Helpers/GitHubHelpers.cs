@@ -13,7 +13,7 @@ internal static class GitHubHelpers
     #endregion MainWindow Instance
 
     #region Properties
-    public static string? ExceptionText { get; set; }
+    private static string? ExceptionText { get; set; }
     #endregion Properties
 
     #region Check for newer release
