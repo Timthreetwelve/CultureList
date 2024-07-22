@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:config="clr-namespace:CultureList.Configuration"
+             xmlns:convert="clr-namespace:CultureList.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -11,10 +12,14 @@
              d:DesignHeight="450" d:DesignWidth="800"
              TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}">
 
-    <!--#region DataContext-->
+    <!--#region DataContext and Resources-->
     <UserControl.DataContext>
         <viewmodels:MainViewModel />
     </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <convert:SpacingConverter x:Key="Spacing" />
+    </UserControl.Resources>
     <!--#endregion-->
 
     <Grid>
@@ -43,6 +48,9 @@
         <DataGrid x:Name="CultureGrid"
                   Grid.Row="1" Grid.Column="0"
                   Margin="10,0,10,20"
+                  materialDesign:DataGridAssist.CellPadding="{Binding RowSpacing,
+                                                                      Source={x:Static config:UserSettings.Setting},
+                                                                      Converter={StaticResource Spacing}}"
                   materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
@@ -96,6 +104,9 @@
         <Grid Grid.Row="1" Grid.Column="1">
             <DataGrid x:Name="DetailsGrid"
                       Margin="10,0,20,20" Padding="0,0,10,0"
+                      materialDesign:DataGridAssist.CellPadding="{Binding RowSpacing,
+                                                                          Source={x:Static config:UserSettings.Setting},
+                                                                          Converter={StaticResource Spacing}}"
                       materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
