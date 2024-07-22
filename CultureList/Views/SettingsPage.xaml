@@ -238,8 +238,7 @@
                                    VerticalAlignment="Center"
                                    Content="Font" />
 
-                            <ComboBox x:Name="CbxFontSelector"
-                                      Grid.Row="4" Grid.Column="2"
+                            <ComboBox Grid.Row="4" Grid.Column="2"
                                       Width="Auto" MinWidth="200"
                                       Margin="0,3,0,0" Padding="2,0,0,3"
                                       HorizontalAlignment="Left"
