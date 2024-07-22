@@ -80,12 +80,12 @@
                    VerticalAlignment="Center"
                    Content="{Binding SelectedCultures,
                                      Source={x:Static config:UserSettings.Setting}}"
-                   FontSize="14"  />
+                   FontSize="14" />
             <!--#endregion-->
 
             <!--#region SnackBar-->
             <materialDesign:Snackbar x:Name="SnackBar1"
-                                     Grid.Column="0"
+                                     Grid.Column="0" Grid.ColumnSpan="2"
                                      HorizontalAlignment="Right"
                                      VerticalAlignment="Top"
                                      Background="{DynamicResource MaterialDesign.Brush.Background}"
