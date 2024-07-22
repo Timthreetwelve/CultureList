@@ -7,6 +7,17 @@ internal partial class SettingsViewModel : ObservableObject
     private static readonly MainWindow? _mainWindow = Application.Current.MainWindow as MainWindow;
     #endregion MainWindow Instance
 
+    #region Properties
+    public static List<FontFamily>? FontList { get; private set; }
+    #endregion Properties
+
+    #region Constructor
+    public SettingsViewModel()
+    {
+        FontList ??= [.. Fonts.SystemFontFamilies.OrderBy(x => x.Source)];
+    }
+    #endregion Constructor
+
     #region Relay commands
     [RelayCommand]
     private static void OpenAppFolder()

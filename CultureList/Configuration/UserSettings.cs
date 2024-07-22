@@ -7,14 +7,6 @@ public partial class UserSettings : ConfigManager<UserSettings>
 {
     #region Properties (some with default values)
     /// <summary>
-    /// Used to determine which culture types are listed.
-    /// Valid values are: NeutralCultures = 1, SpecificCultures = 2, AllCultures = 7.
-    /// All other values are deprecated.
-    /// </summary>
-    [ObservableProperty]
-    private Cultures _selectedCultures = Cultures.AllCultures;
-
-    /// <summary>
     ///  Used to determine if Debug level messages are included in the application log.
     /// </summary>
     [ObservableProperty]
@@ -45,16 +37,24 @@ public partial class UserSettings : ConfigManager<UserSettings>
     private Spacing _rowSpacing = Spacing.Comfortable;
 
     /// <summary>
+    /// Used to determine which culture types are listed.
+    /// Valid values are: NeutralCultures = 1, SpecificCultures = 2, AllCultures = 7.
+    /// All other values are deprecated.
+    /// </summary>
+    [ObservableProperty]
+    private Cultures _selectedCultures = Cultures.AllCultures;
+
+    /// <summary>
+    /// Font used in datagrids.
+    /// </summary>
+    [ObservableProperty]
+    private string? _selectedFont = "Segoe UI";
+
+    /// <summary>
     /// Show Exit in the navigation menu.
     /// </summary>
     [ObservableProperty]
     private bool _showExitInNav = true;
-
-    /// <summary>
-    /// Show Decimal Separator in the grid.
-    /// </summary>
-    [ObservableProperty]
-    private bool _showDecimalSep;
 
     /// <summary>
     /// Show Display Name in the grid.
@@ -67,24 +67,6 @@ public partial class UserSettings : ConfigManager<UserSettings>
     /// </summary>
     [ObservableProperty]
     private bool _showEnglishName;
-
-    /// <summary>
-    /// Show Group Separator in the grid.
-    /// </summary>
-    [ObservableProperty]
-    private bool _showGroupSep;
-
-    /// <summary>
-    /// Show LCID in the grid.
-    /// </summary>
-    [ObservableProperty]
-    private bool _showLCID;
-
-    /// <summary>
-    /// Show Long Format date and time in the grid.
-    /// </summary>
-    [ObservableProperty]
-    private bool _showLongFormat;
 
     /// <summary>
     /// Show Group Separator in the grid.
