@@ -12,30 +12,32 @@ internal static class DetailsHelper
     /// <returns>A Dictionary of culture details.</returns>
     public static Dictionary<string, string> GetDetails(CultureInfo culture)
     {
-        CultureDetails cd = new()
+        if (culture is not null)
         {
-            DisplayName = culture.DisplayName,
-            EnglishName = culture.EnglishName,
-            LanguageCode = culture.Name,
-            Lcid = culture.LCID,
-            LongDate = culture.DateTimeFormat.LongDatePattern,
-            LongTime = culture.DateTimeFormat.LongTimePattern,
-            NativeName = culture.NativeName,
-            ShortDate = culture.DateTimeFormat.ShortDatePattern,
-            ShortTime = culture.DateTimeFormat.ShortTimePattern,
-            ThreeLetterIsoName = culture.ThreeLetterISOLanguageName,
-            ThreeLetterWindowsName = culture.ThreeLetterWindowsLanguageName,
-            TwoLetterIsoName = culture.TwoLetterISOLanguageName,
-            DecimalSeparator = culture.NumberFormat.NumberDecimalSeparator,
-            NumberGroupSeparator = culture.NumberFormat.NumberGroupSeparator,
-            AmDesignator = culture.DateTimeFormat.AMDesignator,
-            PmDesignator = culture.DateTimeFormat.PMDesignator,
-            FirstDayOfWeek = culture.DateTimeFormat.FirstDayOfWeek.ToString(),
-            IetfLanguageTag = culture.IetfLanguageTag,
-        };
+            CultureDetails cd = new()
+            {
+                DisplayName = culture.DisplayName,
+                EnglishName = culture.EnglishName,
+                LanguageCode = culture.Name,
+                Lcid = culture.LCID,
+                LongDate = culture.DateTimeFormat.LongDatePattern,
+                LongTime = culture.DateTimeFormat.LongTimePattern,
+                NativeName = culture.NativeName,
+                ShortDate = culture.DateTimeFormat.ShortDatePattern,
+                ShortTime = culture.DateTimeFormat.ShortTimePattern,
+                ThreeLetterIsoName = culture.ThreeLetterISOLanguageName,
+                ThreeLetterWindowsName = culture.ThreeLetterWindowsLanguageName,
+                TwoLetterIsoName = culture.TwoLetterISOLanguageName,
+                DecimalSeparator = culture.NumberFormat.NumberDecimalSeparator,
+                NumberGroupSeparator = culture.NumberFormat.NumberGroupSeparator,
+                AmDesignator = culture.DateTimeFormat.AMDesignator,
+                PmDesignator = culture.DateTimeFormat.PMDesignator,
+                FirstDayOfWeek = culture.DateTimeFormat.FirstDayOfWeek.ToString(),
+                IetfLanguageTag = culture.IetfLanguageTag,
+            };
 
-        // The order of these statements will be the order that they appear in the datagrid.
-        return new()
+            // The order of these statements will be the order that they appear in the datagrid.
+            return new()
         {
             {GetStringResource("Details_DisplayName"), cd.DisplayName},
             {GetStringResource("Details_NativeName"), cd.NativeName},
@@ -55,6 +57,11 @@ internal static class DetailsHelper
             {GetStringResource("Details_DecimalSeparator"), FormatSeparator(cd.DecimalSeparator)},
             {GetStringResource("Details_NumberGroupSeparator"), FormatSeparator(cd.NumberGroupSeparator)},
         };
+        }
+        else
+        {
+            return [];
+        }
     }
     #endregion Get details
 
