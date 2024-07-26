@@ -60,7 +60,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="250" />
-                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
             <!--#endregion-->
 
@@ -80,7 +80,9 @@
                    VerticalAlignment="Center"
                    Content="{Binding SelectedCultures,
                                      Source={x:Static config:UserSettings.Setting}}"
-                   FontSize="14" />
+                   FontSize="14"
+                   ToolTip="{DynamicResource MsgText_CulturesToolTip}"
+                   ToolTipService.InitialShowDelay="200" />
             <!--#endregion-->
 
             <!--#region SnackBar-->
@@ -94,6 +96,13 @@
                                      MessageQueue="{materialDesign:MessageQueue}" />
             <!--#endregion-->
 
+            <Button Grid.Column="2"
+                    Width="40"
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource InfoButton}"
+                    ToolTip="{DynamicResource MsgText_CopyToolTip}"
+                    ToolTipService.InitialShowDelay="200" />
+
             <!--#region PopupBox in button-->
             <Button Grid.Column="2"
                     Width="40"
@@ -106,7 +115,8 @@
                                          Focusable="False"
                                          PlacementMode="LeftAndAlignTopEdges"
                                          Style="{DynamicResource MaterialDesignPopupBox}"
-                                         ToolTip="{DynamicResource Button_ThreeDotToolTip}">
+                                         ToolTip="{DynamicResource Button_ThreeDotToolTip}"
+                                         ToolTipService.InitialShowDelay="200">
                     <materialDesign:PopupBox.ToggleContent>
                         <materialDesign:PackIcon Width="45" Height="28"
                                                  Foreground="{Binding ElementName=PageTitle,
