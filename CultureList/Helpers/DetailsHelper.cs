@@ -10,9 +10,9 @@ internal static class DetailsHelper
     /// </summary>
     /// <param name="culture">CultureInfo of a single culture.</param>
     /// <returns>A Dictionary of culture details.</returns>
-    public static Dictionary<string, string> GetDetails(CultureInfo culture)
+    public static Dictionary<string, string> GetDetails(CultureInfo? culture)
     {
-        if (culture is not null)
+        if (culture != null)
         {
             CultureDetails cd = new()
             {

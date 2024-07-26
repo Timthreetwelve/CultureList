@@ -1,4 +1,4 @@
-// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
+﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
 namespace CultureList.Views;
 /// <summary>
@@ -43,7 +43,7 @@ public partial class MainPage : UserControl
             {
                 cv.Filter = null;
             }
-            else if (filter?.StartsWith('!') == true)
+            else if (filter.StartsWith('!'))
             {
                 filter = filter[1..].TrimStart(' ');
                 cv.Filter = o =>
@@ -59,9 +59,9 @@ public partial class MainPage : UserControl
                 cv.Filter = o =>
                 {
                     CultureInfo? cu = o as CultureInfo;
-                    return cu!.Name.Contains(filter!, StringComparison.OrdinalIgnoreCase) ||
-                           cu.NativeName.Contains(filter!, StringComparison.OrdinalIgnoreCase) ||
-                           cu.DisplayName.Contains(filter!, StringComparison.OrdinalIgnoreCase);
+                    return cu!.Name.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
+                           cu.NativeName.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
+                           cu.DisplayName.Contains(filter, StringComparison.OrdinalIgnoreCase);
                 };
             }
 
