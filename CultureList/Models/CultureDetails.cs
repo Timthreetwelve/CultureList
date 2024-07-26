@@ -2,6 +2,9 @@
 
 namespace CultureList.Models;
 
+/// <summary>
+/// This class is a subset of the System.Globalization.CultureInfo class.
+/// </summary>
 internal partial class CultureDetails : ObservableObject
 {
     #region Properties

@@ -1,8 +1,13 @@
 ﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
 namespace CultureList.ViewModels;
+
+/// <summary>
+/// ViewModel for the AboutPage class.
+/// </summary>
 internal partial class AboutViewModel
 {
+    #region Relay Commands
     [RelayCommand]
     private static void ViewLicense()
     {
@@ -31,4 +36,5 @@ internal partial class AboutViewModel
     {
         await GitHubHelpers.CheckRelease();
     }
+    #endregion Relay Commands
 }

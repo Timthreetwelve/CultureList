@@ -4,6 +4,11 @@ namespace CultureList.Helpers;
 
 internal static class EnumHelpers
 {
+    /// <summary>
+    /// Gets the enum description attribute.
+    /// </summary>
+    /// <param name="enumObj">The enum.</param>
+    /// <returns>The enum description attribute as a string.</returns>
     internal static string GetEnumDescription(Enum enumObj)
     {
         FieldInfo? field = enumObj.GetType().GetField(enumObj.ToString());

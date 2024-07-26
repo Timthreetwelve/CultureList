@@ -1,6 +1,10 @@
 ﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
 namespace CultureList.ViewModels;
+
+/// <summary>
+/// ViewModel for the SettingsPage class.
+/// </summary>
 internal partial class SettingsViewModel : ObservableObject
 {
     #region MainWindow Instance
