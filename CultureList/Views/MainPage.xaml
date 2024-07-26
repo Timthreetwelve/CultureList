@@ -19,6 +19,7 @@
 
     <UserControl.Resources>
         <convert:SpacingConverter x:Key="Spacing" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
     </UserControl.Resources>
     <!--#endregion-->
 
@@ -70,19 +71,19 @@
                                     Header="{DynamicResource DataGridHeader_DisplayName}"
                                     Visibility="{Binding ShowDisplayName,
                                                          Source={x:Static config:UserSettings.Setting},
-                                                         Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                         Converter={StaticResource BoolToVisConverter}}" />
                 <DataGridTextColumn Binding="{Binding NativeName}"
                                     MinWidth="100"
                                     Header="{DynamicResource DataGridHeader_NativeName}"
                                     Visibility="{Binding ShowNativeName,
                                                          Source={x:Static config:UserSettings.Setting},
-                                                         Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                         Converter={StaticResource BoolToVisConverter}}" />
                 <DataGridTextColumn Binding="{Binding EnglishName}"
                                     MinWidth="100"
                                     Header="{DynamicResource DataGridHeader_EnglishName}"
                                     Visibility="{Binding ShowEnglishName,
                                                          Source={x:Static config:UserSettings.Setting},
-                                                         Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                                         Converter={StaticResource BoolToVisConverter}}" />
             </DataGrid.Columns>
             <bh:Interaction.Triggers>
                 <bh:EventTrigger EventName="SelectionChanged">
