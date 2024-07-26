@@ -2,6 +2,9 @@
 
 namespace CultureList.ViewModels;
 
+/// <summary>
+/// ViewModel for the MainPage class.
+/// </summary>
 internal partial class MainViewModel : ObservableObject
 {
     #region Populate the collection with Culture Information

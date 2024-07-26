@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
+// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
 namespace CultureList.Views;
 /// <summary>
@@ -6,14 +6,22 @@ namespace CultureList.Views;
 /// </summary>
 public partial class MainPage : UserControl
 {
+    #region MainPage Instance
     public static MainPage? Instance { get; private set; }
+    #endregion MainPage Instance
+
+    #region Constructor
     public MainPage()
     {
         InitializeComponent();
         Instance = this;
     }
+    #endregion Constructor
 
     #region Filter text changed
+    /// <summary>
+    /// Text changed event for the filter textbox
+    /// </summary>
     private void TbxSearch_TextChanged(object sender, TextChangedEventArgs e)
     {
         FilterTheGrid(sender);
