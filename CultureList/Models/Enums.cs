@@ -87,7 +87,9 @@ public enum MySize
     [LocalizedDescription("SettingsEnum_Size_Larger")]
     Larger = 5,
     [LocalizedDescription("SettingsEnum_Size_Largest")]
-    Largest = 6
+    Largest = 6,
+    [LocalizedDescription("SettingsEnum_Size_140%")]
+    Super = 7,
 }
 #endregion UI size
 

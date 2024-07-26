@@ -295,6 +295,7 @@ internal static class MainWindowHelpers
             MySize.Large => 1.05,
             MySize.Larger => 1.1,
             MySize.Largest => 1.2,
+            MySize.Super => 1.4,
             _ => 1.0,
         };
         _mainWindow!.MainGrid.LayoutTransform = new ScaleTransform(newSize, newSize);
