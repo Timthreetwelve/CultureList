@@ -50,8 +50,9 @@ public static class ConfigHelpers
         }
         catch (Exception ex)
         {
-            _ = MessageBox.Show($"Error reading settings file.\n{ex.Message}",
-                     "Error",
+            string msg = $"{GetStringResource("MsgText_ErrorReadingSettings")}\n{ex.Message}";
+            _ = MessageBox.Show(msg,
+                     GetStringResource("MsgText_ErrorCaption"),
                      MessageBoxButton.OK,
                      MessageBoxImage.Error);
             return new UserSettings();
@@ -72,8 +73,9 @@ public static class ConfigHelpers
         }
         catch (Exception ex)
         {
-            _ = MessageBox.Show($"Error saving settings file.\n{ex.Message}",
-                     "Error",
+            string msg = $"{GetStringResource("MsgText_ErrorSavingSettings")}\n{ex.Message}";
+            _ = MessageBox.Show(msg,
+                     GetStringResource("MsgText_ErrorCaption"),
                      MessageBoxButton.OK,
                      MessageBoxImage.Error);
         }

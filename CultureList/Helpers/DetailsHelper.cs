@@ -76,9 +76,9 @@ internal static class DetailsHelper
         byte[] ba = Encoding.Default.GetBytes(separator);
         return BitConverter.ToString(ba).Replace("-", "") switch
         {
-            "C2A0" => "non-breaking space",
-            "E280AF" => "narrow non-breaking space",
-            "20" => "space",
+            "C2A0" => GetStringResource("Details_NBSpaceChar"),
+            "E280AF" => GetStringResource("Details_NNBSpaceChar"),
+            "20" => GetStringResource("Details_SpaceChar"),
             _ => separator,
         };
     }
