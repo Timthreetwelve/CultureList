@@ -5,9 +5,10 @@ Culture List will display a subset of the culture information found in `System.G
 ## Features
 - Select from Specific Cultures, Neutral Cultures, or All Cultures
 - Choose to have the Display Name, the Native Name or the English Name to display next to the Language Code
--  Select a culture to display details. See screenshots.
--  Quickly filter the list
--  Easily copy text
+- Select a culture to display details. See screenshots.
+- Choose a font that works best for you.
+- Quickly filter the list
+- Easily copy text
 
 ## Screenshots
 
