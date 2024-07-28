@@ -1,4 +1,4 @@
-# CultureList
+# Culture List
 
 Culture List will display a subset of the culture information found in `System.Globalization.CultureInfo`. I built the application to be able to quickly look up information such as date and number formats and the correct local spelling of a language name.
 
