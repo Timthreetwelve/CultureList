@@ -20,7 +20,6 @@
 
     <UserControl.Resources>
         <convert:BooleanInverter x:Key="BoolInverter" />
-        <convert:LanguageConverter x:Key="LangConverter" />
         <convert:EnumToBooleanConverter x:Key="EnumToBool" />
     </UserControl.Resources>
     <!--#endregion-->
