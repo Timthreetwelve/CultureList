@@ -129,7 +129,7 @@
                                 <RowDefinition Height="30" />
                                 <RowDefinition Height="30" />
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0" 
+                            <Label Grid.Row="0"
                                    Content="{DynamicResource SettingsItem_DisplayNameColumn}" />
 
                             <RadioButton Grid.Row="1"
@@ -405,16 +405,15 @@
                             <ComboBox x:Name="CbxLanguage"
                                       Grid.Column="2"
                                       Width="Auto" MinWidth="200"
-                                      Margin="0,3,0,0" Padding="2,0,0,3"
+                                      Margin="0,3,0,0" Padding="5"
                                       HorizontalAlignment="Left"
                                       IsEnabled="{Binding Path=UseOSLanguage,
                                                           Source={x:Static config:UserSettings.Setting},
                                                           Converter={StaticResource BoolInverter}}"
                                       ItemsSource="{Binding DefinedLanguages}"
-                                      Loaded="CbxLanguage_Loaded"
-                                      SelectedItem="{Binding Path=UILanguage,
-                                                             Source={x:Static config:UserSettings.Setting},
-                                                             Converter={StaticResource LangConverter}}"
+                                      SelectedValuePath="LanguageCode"
+                                      SelectedValue="{Binding Path=UILanguage,
+                                                             Source={x:Static config:UserSettings.Setting}}"
                                       Style="{StaticResource MaterialDesignComboBox}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
