@@ -221,60 +221,46 @@
                                    VerticalAlignment="Center"
                                    Content="{DynamicResource SettingsItem_Theme}" />
                             <ComboBox Grid.Row="0" Grid.Column="2"
-                                      Width="Auto" MinWidth="200"
-                                      Margin="0,3,0,0" Padding="2,0,0,3"
-                                      HorizontalAlignment="Left"
                                       ItemsSource="{Binding Source={convert:EnumBindingSource {x:Type models:ThemeType}}}"
                                       SelectedItem="{Binding UITheme,
                                                              Source={x:Static config:UserSettings.Setting}}"
-                                      Style="{StaticResource MaterialDesignComboBox}" />
+                                      Style="{StaticResource SettingsComboBox}" />
 
                             <Label Grid.Row="1" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Content="{DynamicResource SettingsItem_UISize}" />
                             <ComboBox Grid.Row="1" Grid.Column="2"
-                                      Width="Auto" MinWidth="200"
-                                      Margin="0,3,0,0" Padding="2,0,0,3"
-                                      HorizontalAlignment="Left"
                                       ItemsSource="{Binding Source={convert:EnumBindingSource {x:Type models:MySize}}}"
                                       SelectedItem="{Binding UISize,
                                                              Source={x:Static config:UserSettings.Setting}}"
-                                      Style="{StaticResource MaterialDesignComboBox}" />
+                                      Style="{StaticResource SettingsComboBox}" />
 
                             <Label Grid.Row="2" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Content="{DynamicResource SettingsItem_AccentColor}" />
                             <ComboBox Grid.Row="2" Grid.Column="2"
-                                      Width="Auto" MinWidth="200"
-                                      Margin="0,3,0,0" Padding="2,0,0,3"
-                                      HorizontalAlignment="Left"
                                       ItemsSource="{Binding Source={convert:EnumBindingSource {x:Type models:AccentColor}}}"
                                       MaxDropDownHeight="300"
                                       SelectedItem="{Binding PrimaryColor,
                                                              Source={x:Static config:UserSettings.Setting}}"
-                                      Style="{StaticResource MaterialDesignComboBox}" />
+                                      Style="{StaticResource SettingsComboBox}" />
 
                             <Label Grid.Row="3" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Content="{DynamicResource SettingsItem_RowHeight}" />
 
                             <ComboBox Grid.Row="3" Grid.Column="2"
-                                      Width="Auto" MinWidth="200"
-                                      Margin="0,3,0,0" Padding="2,0,0,3"
-                                      HorizontalAlignment="Left"
                                       ItemsSource="{Binding Source={convert:EnumBindingSource {x:Type models:Spacing}}}"
                                       SelectedItem="{Binding RowSpacing,
                                                              Source={x:Static config:UserSettings.Setting}}"
-                                      Style="{StaticResource MaterialDesignComboBox}" />
+                                      Style="{StaticResource SettingsComboBox}" />
 
                             <Label Grid.Row="4" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Content="Font" />
 
                             <ComboBox Grid.Row="4" Grid.Column="2"
-                                      Width="Auto" MinWidth="200"
-                                      Margin="0,3,0,0" Padding="2,0,0,3"
-                                      HorizontalAlignment="Left"
+                                      Style="{StaticResource SettingsComboBox}"
                                       ItemsSource="{Binding FontList}"
                                       SelectedValue="{Binding SelectedFont,
                                                               Source={x:Static config:UserSettings.Setting}}"
@@ -401,11 +387,8 @@
                                    Content="{DynamicResource SettingsItem_Language}"
                                    ToolTipService.InitialShowDelay="300"
                                    ToolTipService.Placement="Top" />
-                            <ComboBox x:Name="CbxLanguage"
+                            <ComboBox 
                                       Grid.Column="2"
-                                      Width="Auto" MinWidth="200"
-                                      Margin="0,3,0,0" Padding="5"
-                                      HorizontalAlignment="Left"
                                       IsEnabled="{Binding Path=UseOSLanguage,
                                                           Source={x:Static config:UserSettings.Setting},
                                                           Converter={StaticResource BoolInverter}}"
@@ -413,7 +396,7 @@
                                       SelectedValuePath="LanguageCode"
                                       SelectedValue="{Binding Path=UILanguage,
                                                              Source={x:Static config:UserSettings.Setting}}"
-                                      Style="{StaticResource MaterialDesignComboBox}">
+                                      Style="{StaticResource SettingsComboBox}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
