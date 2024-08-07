@@ -1,4 +1,4 @@
-// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
+﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 using Octokit;
 
 namespace CultureList.Helpers;
@@ -45,7 +45,7 @@ internal static class GitHubHelpers
 
         if (tag.StartsWith("v", StringComparison.InvariantCultureIgnoreCase))
         {
-            tag = tag.ToLower().TrimStart('v');
+            tag = tag.ToLower(CultureInfo.InvariantCulture).TrimStart('v');
         }
 
         Version latestVersion = new(tag);
