@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
+// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 using Octokit;
 
 namespace CultureList.Helpers;
@@ -65,7 +65,8 @@ internal static class GitHubHelpers
         }
         else
         {
-            string msg = string.Format(GetStringResource("MsgText_AppUpdateNewerFound"), latestVersion);
+            CompositeFormat format = CompositeFormat.Parse(GetStringResource("MsgText_AppUpdateNewerFound"));
+            string msg = string.Format(CultureInfo.InvariantCulture, format, latestVersion);
             _log.Debug(msg);
             _ = new MDCustMsgBox($"{msg}\n\n" +
                             $"{GetStringResource("MsgText_AppUpdateGoToRelease")}\n\n" +

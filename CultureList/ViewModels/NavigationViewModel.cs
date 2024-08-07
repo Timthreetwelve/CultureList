@@ -196,8 +196,9 @@ internal partial class NavigationViewModel : ObservableObject
                 case Key.OemPlus:
                     {
                         MainWindowHelpers.EverythingLarger();
+                        CompositeFormat format = CompositeFormat.Parse(GetStringResource("MsgText_UISizeSet"));
                         string size = EnumHelpers.GetEnumDescription(UserSettings.Setting!.UISize);
-                        string message = string.Format(GetStringResource("MsgText_UISizeSet"), size);
+                        string message = string.Format(CultureInfo.InvariantCulture, format, size);
                         SnackbarMsg.ClearAndQueueMessage(message, 2000);
                         break;
                     }
@@ -205,8 +206,9 @@ internal partial class NavigationViewModel : ObservableObject
                 case Key.OemMinus:
                     {
                         MainWindowHelpers.EverythingSmaller();
+                        CompositeFormat format = CompositeFormat.Parse(GetStringResource("MsgText_UISizeSet"));
                         string size = EnumHelpers.GetEnumDescription(UserSettings.Setting!.UISize);
-                        string message = string.Format(GetStringResource("MsgText_UISizeSet"), size);
+                        string message = string.Format(CultureInfo.InvariantCulture, format, size);
                         SnackbarMsg.ClearAndQueueMessage(message, 2000);
                         break;
                     }
@@ -235,7 +237,8 @@ internal partial class NavigationViewModel : ObservableObject
                         break;
                 }
                 string theme = EnumHelpers.GetEnumDescription(UserSettings.Setting.UITheme);
-                string message = string.Format(GetStringResource("MsgText_UIThemeSet"), theme);
+                CompositeFormat format = CompositeFormat.Parse(GetStringResource("MsgText_UIThemeSet"));
+                string message = string.Format(CultureInfo.InvariantCulture, format, theme);
                 SnackbarMsg.ClearAndQueueMessage(message, 2000);
             }
             if (e.Key == Key.C)
@@ -249,7 +252,8 @@ internal partial class NavigationViewModel : ObservableObject
                     UserSettings.Setting.PrimaryColor++;
                 }
                 string color = EnumHelpers.GetEnumDescription(UserSettings.Setting.PrimaryColor);
-                string message = string.Format(GetStringResource("MsgText_UIColorSet"), color);
+                CompositeFormat format = CompositeFormat.Parse(GetStringResource("MsgText_UIThemeSet"));
+                string message = string.Format(CultureInfo.InvariantCulture, format, color);
                 SnackbarMsg.ClearAndQueueMessage(message, 2000);
             }
             if (e.Key == Key.F)

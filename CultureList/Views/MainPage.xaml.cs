@@ -71,8 +71,8 @@ public partial class MainPage : UserControl
             }
             else
             {
-                SnackbarMsg.ClearAndQueueMessage(string.Format(
-                    GetStringResource("MsgText_FilterRowsShown"), CultureGrid.Items.Count), 2000);
+                CompositeFormat format = CompositeFormat.Parse(GetStringResource("MsgText_FilterRowsShown"));
+                SnackbarMsg.ClearAndQueueMessage(string.Format(null, format, CultureGrid.Items.Count), 2000);
             }
         }
     }
