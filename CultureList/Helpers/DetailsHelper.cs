@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
+// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
 namespace CultureList.Helpers;
 
@@ -46,7 +46,7 @@ internal static class DetailsHelper
             {GetStringResource("Details_IeftTag"), cd.IetfLanguageTag},
             {GetStringResource("Details_TwoLetterIsoLanguage"), cd.TwoLetterIsoName},
             {GetStringResource("Details_ThreeLetterIsoLanguage"), cd.ThreeLetterIsoName},
-            {GetStringResource("Details_Lcid"), cd.Lcid.ToString()},
+            {GetStringResource("Details_Lcid"), FormatLcid(cd.Lcid)},
             {GetStringResource("Details_ShortTimePattern"), cd.ShortTime},
             {GetStringResource("Details_ShortDatePattern"), cd.ShortDate},
             {GetStringResource("Details_LongTimePattern"), cd.LongTime},
@@ -83,4 +83,16 @@ internal static class DetailsHelper
         };
     }
     #endregion Format the separator string
+
+    #region Format the LCID
+    /// <summary>
+    /// Converts LCID to string.
+    /// </summary>
+    /// <param name="lcid">LCID as int.</param>
+    /// <returns>LCID as string</returns>
+    private static string FormatLcid(int lcid)
+    {
+        return lcid.ToString(CultureInfo.InvariantCulture);
+    }
+    #endregion Format the LCID
 }
