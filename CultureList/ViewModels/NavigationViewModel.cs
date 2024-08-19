@@ -1,4 +1,4 @@
-// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
+﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
 namespace CultureList.ViewModels;
 
@@ -164,15 +164,17 @@ internal sealed partial class NavigationViewModel : ObservableObject
     private static void KeyDown(KeyEventArgs e)
     {
         #region Keys without modifiers
-        switch (e.Key)
+        if (e.KeyboardDevice.Modifiers == ModifierKeys.None)
         {
-            case Key.F1:
-                {
-                    _mainWindow!.NavigationListBox.SelectedValue = FindNavPage(NavPage.About);
-                    break;
-                }
+            switch (e.Key)
+            {
+                case Key.F1:
+                    {
+                        _mainWindow!.NavigationListBox.SelectedValue = FindNavPage(NavPage.About);
+                        break;
+                    }
+            }
         }
-
         #endregion Keys without modifiers
 
         #region Keys with Ctrl
@@ -204,6 +206,41 @@ internal sealed partial class NavigationViewModel : ObservableObject
                         string size = EnumHelpers.GetEnumDescription(UserSettings.Setting!.UISize);
                         string message = string.Format(CultureInfo.InvariantCulture, format, size);
                         SnackbarMsg.ClearAndQueueMessage(message, 2000);
+                        break;
+                    }
+                case Key.N:
+                    {
+                        if (UserSettings.Setting!.ShowDisplayName)
+                        {
+                            UserSettings.Setting.ShowDisplayName = false;
+                            UserSettings.Setting.ShowNativeName = true;
+                        }
+                        else if (UserSettings.Setting.ShowNativeName)
+                        {
+                            UserSettings.Setting.ShowNativeName = false;
+                            UserSettings.Setting.ShowEnglishName = true;
+                        }
+                        else if (UserSettings.Setting.ShowEnglishName)
+                        {
+                            UserSettings.Setting.ShowEnglishName = false;
+                            UserSettings.Setting.ShowDisplayName = true;
+                        }
+                        break;
+                    }
+                case Key.L:
+                    {
+                        if (UserSettings.Setting!.SelectedCultures == Cultures.AllCultures)
+                        {
+                            UserSettings.Setting.SelectedCultures = Cultures.NeutralCultures;
+                        }
+                        else if (UserSettings.Setting.SelectedCultures == Cultures.NeutralCultures)
+                        {
+                            UserSettings.Setting.SelectedCultures = Cultures.SpecificCultures;
+                        }
+                        else
+                        {
+                            UserSettings.Setting.SelectedCultures = Cultures.AllCultures;
+                        }
                         break;
                     }
             }
