@@ -132,8 +132,9 @@ internal sealed partial class NavigationViewModel : ObservableObject
 
     #region Right mouse button
     /// <summary>
-    /// Copy (nearly) any text in a TextBlock to the clipboard on right mouse button up.
+    /// Copy any text in a TextBlock to the clipboard on right mouse button up.
     /// </summary>
+    /// <param name="e">Mouse button event args</param>
     [RelayCommand]
     private static void RightMouseUp(MouseButtonEventArgs e)
     {
@@ -141,13 +142,6 @@ internal sealed partial class NavigationViewModel : ObservableObject
         {
             try
             {
-                // Skip the navigation menu
-                ListBox lb = MainWindowHelpers.FindParent<ListBox>(text);
-                if (lb?.Name == "NavigationListBox")
-                {
-                    return;
-                }
-
                 // Copy to clipboard and display message.
                 if (ClipboardHelper.CopyTextToClipboard(text.Text))
                 {
