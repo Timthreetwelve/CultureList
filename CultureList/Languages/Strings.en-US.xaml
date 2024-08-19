@@ -70,10 +70,12 @@
      <!--  Details Pane  -->
     <sys:String x:Key="Details_AmDesignator">AM Designator</sys:String>
     <sys:String x:Key="Details_DecimalSeparator">Number Decimal Separator</sys:String>
+    <sys:String x:Key="Details_DetailsCaption">Details</sys:String>
     <sys:String x:Key="Details_DisplayName">Display Name</sys:String>
     <sys:String x:Key="Details_EnglishName">English Name</sys:String>
     <sys:String x:Key="Details_FirstDayOfWeek">First Day of Week</sys:String>
     <sys:String x:Key="Details_IeftTag">IEFT Language Tag</sys:String>
+    <sys:String x:Key="Details_IsRightToLeft">Right-to-Left Language</sys:String>
     <sys:String x:Key="Details_LanguageCode">Language Code</sys:String>
     <sys:String x:Key="Details_Lcid">Language Culture Identifier (LCID)</sys:String>
     <sys:String x:Key="Details_LongDatePattern">Long Date Pattern</sys:String>
@@ -83,6 +85,7 @@
     <sys:String x:Key="Details_NNBSpaceChar">narrow non-breaking space character</sys:String>
     <sys:String x:Key="Details_NumberGroupSeparator">Number Group Separator</sys:String>
     <sys:String x:Key="Details_PmDesignator">PM Designator</sys:String>
+    <sys:String x:Key="Details_SelectAnItem">To view details, select an item from the list.</sys:String>
     <sys:String x:Key="Details_ShortDatePattern">Short Date Pattern</sys:String>
     <sys:String x:Key="Details_ShortTimePattern">Short Time Pattern</sys:String>
     <sys:String x:Key="Details_SpaceChar">space character</sys:String>
