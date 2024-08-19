@@ -38,6 +38,12 @@ public static class SettingChange
             case nameof(UserSettings.Setting.UILanguage):
                 LocalizationHelpers.SaveAndRestart();
                 break;
+
+            case nameof(UserSettings.Setting.SelectedCultures):
+                {
+                    MainViewModel.LoadData();
+                }
+                break;
         }
     }
     #endregion User Setting change

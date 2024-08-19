@@ -1,25 +1,28 @@
 ﻿<UserControl x:Class="CultureList.Views.MainPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:config="clr-namespace:CultureList.Configuration"
              xmlns:convert="clr-namespace:CultureList.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:global="clr-namespace:System.Globalization;assembly=mscorlib"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewmodels="clr-namespace:CultureList.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}">
 
     <!--#region DataContext and Resources-->
-    <UserControl.DataContext>
-        <viewmodels:MainViewModel />
-    </UserControl.DataContext>
-
     <UserControl.Resources>
         <convert:SpacingConverter x:Key="Spacing" />
+        <convert:RowHeightConverter x:Key="RowHeightConvert" />
+        <convert:NumberGroupConverter x:Key="NumGroupConvert" />
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+
+        <Style TargetType="TextBlock"
+               BasedOn="{StaticResource MaterialDesignTextBlock}">
+            <Setter Property="FontFamily" Value="{Binding SelectedFont, Source={x:Static config:UserSettings.Setting}}" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
     </UserControl.Resources>
     <!--#endregion-->
 
@@ -30,7 +33,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="500" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <!--#endregion-->
@@ -48,7 +51,7 @@
         <!--#region Culture List Datagrid-->
         <DataGrid x:Name="CultureGrid"
                   Grid.Row="1" Grid.Column="0"
-                  Margin="10,0,10,20"
+                  Margin="10,0,10,10"
                   materialDesign:DataGridAssist.CellPadding="{Binding RowSpacing,
                                                                       Source={x:Static config:UserSettings.Setting},
                                                                       Converter={StaticResource Spacing}}"
@@ -64,75 +67,215 @@
                   SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}"
-                                    MinWidth="100"
+                                    MinWidth="130"
                                     Header="{DynamicResource DataGridHeader_Code}" />
                 <DataGridTextColumn Binding="{Binding DisplayName}"
-                                    MinWidth="100"
+                                    MinWidth="400"
                                     Header="{DynamicResource DataGridHeader_DisplayName}"
                                     Visibility="{Binding ShowDisplayName,
                                                          Source={x:Static config:UserSettings.Setting},
                                                          Converter={StaticResource BoolToVisConverter}}" />
                 <DataGridTextColumn Binding="{Binding NativeName}"
-                                    MinWidth="100"
+                                    MinWidth="400"
+                                    CellStyle="{StaticResource RightToLeftCell}"
                                     Header="{DynamicResource DataGridHeader_NativeName}"
                                     Visibility="{Binding ShowNativeName,
                                                          Source={x:Static config:UserSettings.Setting},
                                                          Converter={StaticResource BoolToVisConverter}}" />
                 <DataGridTextColumn Binding="{Binding EnglishName}"
-                                    MinWidth="100"
+                                    MinWidth="400"
                                     Header="{DynamicResource DataGridHeader_EnglishName}"
                                     Visibility="{Binding ShowEnglishName,
                                                          Source={x:Static config:UserSettings.Setting},
                                                          Converter={StaticResource BoolToVisConverter}}" />
             </DataGrid.Columns>
-            <bh:Interaction.Triggers>
-                <bh:EventTrigger EventName="SelectionChanged">
-                    <bh:InvokeCommandAction Command="{Binding GetDetailCommand}"
-                                            CommandParameter="{Binding Path=SelectedItem,
-                                                                       ElementName=CultureGrid}" />
-                </bh:EventTrigger>
-            </bh:Interaction.Triggers>
         </DataGrid>
         <!--#endregion-->
 
         <!--#region Details Header-->
-        <TextBlock Grid.Row="0" Grid.Column="1"
-                   Margin="25,0" VerticalAlignment="Center"
-                   FontSize="24" Text="Details" />
+        <Label Grid.Row="0" Grid.Column="1"
+               Margin="25,0" VerticalAlignment="Center"
+               Content="{StaticResource Details_DetailsCaption}"
+               FontSize="24" />
         <!--#endregion-->
 
         <!--#region Details area-->
-        <Grid Grid.Row="1" Grid.Column="1">
-            <DataGrid x:Name="DetailsGrid"
-                      Margin="10,0,20,20" Padding="0,0,10,0"
-                      materialDesign:DataGridAssist.CellPadding="{Binding RowSpacing,
-                                                                          Source={x:Static config:UserSettings.Setting},
-                                                                          Converter={StaticResource Spacing}}"
-                      materialDesign:DataGridAssist.SelectedCellBorderBrush="Transparent"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserDeleteRows="False"
-                      CanUserReorderColumns="True"
-                      FontFamily="{Binding SelectedFont,
-                                           Source={x:Static config:UserSettings.Setting}}"
-                      FontSize="14" IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Key}"
-                                        MinWidth="100"
-                                        Header="Property" />
-                    <DataGridTextColumn Binding="{Binding Value}"
-                                        Header="Value" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+        <Border Grid.Row="1" Grid.Column="1"
+                Margin="0,0,10,10"
+                Background="{DynamicResource MaterialDesign.Brush.Background}"
+                CornerRadius="3">
+            <ScrollViewer Margin="0" Padding="20,15"
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto">
+                <Grid d:DataContext="{d:DesignInstance Type=global:CultureInfo}">
+                    <Grid.DataContext>
+                        <Binding ElementName="CultureGrid"
+                                 Path="SelectedValue" />
+                    </Grid.DataContext>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=CultureGrid, Path=SelectedItems.Count}"
+                                             Value="1">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <!--#region Row and Column definitions-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition Height="{Binding RowSpacing, Source={x:Static config:UserSettings.Setting}, Converter={StaticResource RowHeightConvert}}" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <!--#endregion-->
+
+                    <!--#region TextBlocks for details-->
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               Text="{StaticResource Details_DisplayName}" />
+                    <TextBlock Grid.Row="0" Grid.Column="2"
+                               Text="{Binding DisplayName}" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0"
+                               Text="{StaticResource Details_NativeName}" />
+                    <TextBlock Grid.Row="1" Grid.Column="2"
+                               Text="{Binding NativeName}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock"
+                                   BasedOn="{StaticResource MaterialDesignTextBlock}">
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontFamily" Value="{Binding SelectedFont, Source={x:Static config:UserSettings.Setting}}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding TextInfo.IsRightToLeft}"
+                                                 Value="true">
+                                        <Setter Property="FlowDirection" Value="RightToLeft" />
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0"
+                               Text="{StaticResource Details_EnglishName}" />
+                    <TextBlock Grid.Row="2" Grid.Column="2"
+                               Text="{Binding EnglishName}" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="0"
+                               Text="{StaticResource Details_LanguageCode}" />
+                    <TextBlock Grid.Row="3" Grid.Column="2"
+                               Text="{Binding Name}" />
+
+                    <TextBlock Grid.Row="4" Grid.Column="0"
+                               Text="{StaticResource Details_IeftTag}" />
+                    <TextBlock Grid.Row="4" Grid.Column="2"
+                               Text="{Binding IetfLanguageTag}" />
+
+                    <TextBlock Grid.Row="5" Grid.Column="0"
+                               Text="{StaticResource Details_TwoLetterIsoLanguage}" />
+                    <TextBlock Grid.Row="5" Grid.Column="2"
+                               Text="{Binding TwoLetterISOLanguageName}" />
+
+                    <TextBlock Grid.Row="6" Grid.Column="0"
+                               Text="{StaticResource Details_ThreeLetterIsoLanguage}" />
+                    <TextBlock Grid.Row="6" Grid.Column="2"
+                               Text="{Binding ThreeLetterISOLanguageName}" />
+
+                    <TextBlock Grid.Row="7" Grid.Column="0"
+                               Text="{StaticResource Details_ThreeLetterWindowsName}" />
+                    <TextBlock Grid.Row="7" Grid.Column="2"
+                               Text="{Binding ThreeLetterWindowsLanguageName}" />
+
+                    <TextBlock Grid.Row="8" Grid.Column="0"
+                               Text="{StaticResource Details_Lcid}" />
+                    <TextBlock Grid.Row="8" Grid.Column="2"
+                               Text="{Binding LCID}" />
+
+                    <TextBlock Grid.Row="9" Grid.Column="0"
+                               Text="{StaticResource Details_ShortTimePattern}" />
+                    <TextBlock Grid.Row="9" Grid.Column="2"
+                               Text="{Binding DateTimeFormat.ShortTimePattern}" />
+
+                    <TextBlock Grid.Row="10" Grid.Column="0"
+                               Text="{StaticResource Details_LongTimePattern}" />
+                    <TextBlock Grid.Row="10" Grid.Column="2"
+                               Text="{Binding DateTimeFormat.LongTimePattern}" />
+
+                    <TextBlock Grid.Row="11" Grid.Column="0"
+                               Text="{StaticResource Details_ShortDatePattern}" />
+                    <TextBlock Grid.Row="11" Grid.Column="2"
+                               Text="{Binding DateTimeFormat.ShortDatePattern}" />
+
+                    <TextBlock Grid.Row="12" Grid.Column="0"
+                               Text="{StaticResource Details_LongDatePattern}" />
+                    <TextBlock Grid.Row="12" Grid.Column="2"
+                               Text="{Binding DateTimeFormat.LongDatePattern}" />
+
+                    <TextBlock Grid.Row="13" Grid.Column="0"
+                               Text="{StaticResource Details_FirstDayOfWeek}" />
+                    <TextBlock Grid.Row="13" Grid.Column="2"
+                               Text="{Binding DateTimeFormat.FirstDayOfWeek}" />
+
+                    <TextBlock Grid.Row="14" Grid.Column="0"
+                               Text="{StaticResource Details_AmDesignator}" />
+                    <TextBlock Grid.Row="14" Grid.Column="2"
+                               Text="{Binding DateTimeFormat.AMDesignator}" />
+
+                    <TextBlock Grid.Row="15" Grid.Column="0"
+                               Text="{StaticResource Details_PmDesignator}" />
+                    <TextBlock Grid.Row="15" Grid.Column="2"
+                               Text="{Binding DateTimeFormat.PMDesignator}" />
+
+                    <TextBlock Grid.Row="16" Grid.Column="0"
+                               Text="{StaticResource Details_DecimalSeparator}" />
+                    <TextBlock Grid.Row="16" Grid.Column="2"
+                               Text="{Binding NumberFormat.NumberDecimalSeparator}" />
+
+                    <TextBlock Grid.Row="17" Grid.Column="0"
+                               Text="{StaticResource Details_NumberGroupSeparator}" />
+                    <TextBlock Grid.Row="17" Grid.Column="2"
+                               Text="{Binding NumberFormat.NumberGroupSeparator,
+                                              Converter={StaticResource NumGroupConvert}}" />
+
+                    <TextBlock Grid.Row="18" Grid.Column="0"
+                               Text="{StaticResource Details_IsRightToLeft}" />
+                    <TextBlock Grid.Row="18" Grid.Column="2"
+                               Text="{Binding TextInfo.IsRightToLeft}" />
+                    <!--#endregion-->
+                </Grid>
+            </ScrollViewer>
+        </Border>
         <!--#endregion-->
 
         <!--#region Placeholder text shown when nothing is selected in CultureGrid-->
         <Grid Grid.Row="1" Grid.Column="1"
               KeyboardNavigation.TabNavigation="None">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition />
-                <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
             <Grid.Style>
                 <Style TargetType="Grid">
@@ -148,11 +291,11 @@
                        VerticalAlignment="Center"
                        FontSize="24" FontWeight="SemiBold"
                        Opacity=".4"
-                       Text="To view details select an item from the list."
+                       Text="{StaticResource Details_SelectAnItem}"
                        TextWrapping="Wrap" />
             <Image Grid.Row="1"
                    Width="300"
-                   Margin="20" VerticalAlignment="Top"
+                   Margin="20" VerticalAlignment="Center"
                    Source="/Images/globe.png" />
         </Grid>
         <!--#endregion-->

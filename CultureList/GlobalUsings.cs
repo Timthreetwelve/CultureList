@@ -38,6 +38,7 @@ global using CultureList.Converters;
 global using CultureList.Dialogs;
 global using CultureList.Helpers;
 global using CultureList.Models;
+global using CultureList.ViewModels;
 global using CultureList.Views;
 
 global using static CultureList.Helpers.NLogHelpers;

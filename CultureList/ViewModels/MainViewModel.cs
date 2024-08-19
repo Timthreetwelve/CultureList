@@ -1,4 +1,4 @@
-// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
+﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
 namespace CultureList.ViewModels;
 
@@ -7,39 +7,35 @@ namespace CultureList.ViewModels;
 /// </summary>
 internal sealed class MainViewModel
 {
+    #region Constructor
+    public MainViewModel()
+    {
+        if (Cultures is null)
+        {
+            LoadData();
+        }
+    }
+    #endregion Constructor
+
     #region Populate the collection with Culture Information
     /// <summary>
     /// Loads the culture info into the collection depending on which CultureTypes is set.
     /// </summary>
-    private static List<CultureInfo> LoadData()
+    internal static void LoadData()
     {
         CultureTypes types = CheckCultureType(UserSettings.Setting!.SelectedCultures);
-        List<CultureInfo> infos = [.. CultureInfo.GetCultures(types).OrderBy(x => x.Name)];
-        _log.Debug($"Loaded {infos.Count} {UserSettings.Setting.SelectedCultures} items.");
-        return infos;
+        Cultures = new List<CultureInfo>([.. CultureInfo.GetCultures(types).OrderBy(static x => x.Name)]);
+        if (MainPage.Instance != null)
+        {
+            MainPage.Instance.CultureGrid.ItemsSource = Cultures;
+        }
+        _log.Debug($"Loaded {Cultures.Count} {UserSettings.Setting.SelectedCultures} items.");
     }
     #endregion Populate the collection with Culture Information
 
     #region Collection of Culture Information
-    private static List<CultureInfo>? _cultures;
-
-    /// <summary>
-    /// Static List of culture information.
-    /// </summary>
-    public static List<CultureInfo> Cultures
-    {
-        get
-        {
-            _cultures = new List<CultureInfo>(LoadData());
-            return _cultures;
-        }
-    }
+    public static List<CultureInfo>? Cultures { get; private set; }
     #endregion Collection of Culture Information
-
-    #region Get additional details for the selected culture
-    [RelayCommand]
-    private static void GetDetail(CultureInfo cu) => MainPage.Instance!.DetailsGrid.ItemsSource = DetailsHelper.GetDetails(cu);
-    #endregion Get additional details for the selected culture
 
     #region Verify culture type
     /// <summary>
