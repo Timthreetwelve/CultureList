@@ -5,7 +5,7 @@ namespace CultureList.ViewModels;
 /// <summary>
 /// ViewModel for the AboutPage class.
 /// </summary>
-internal partial class AboutViewModel
+internal sealed partial class AboutViewModel
 {
     #region Relay Commands
     [RelayCommand]

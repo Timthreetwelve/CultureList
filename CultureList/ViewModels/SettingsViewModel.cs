@@ -5,7 +5,7 @@ namespace CultureList.ViewModels;
 /// <summary>
 /// ViewModel for the SettingsPage class.
 /// </summary>
-internal partial class SettingsViewModel : ObservableObject
+internal sealed partial class SettingsViewModel : ObservableObject
 {
     #region MainWindow Instance
     private static readonly MainWindow? _mainWindow = Application.Current.MainWindow as MainWindow;

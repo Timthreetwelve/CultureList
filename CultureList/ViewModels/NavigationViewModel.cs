@@ -1,8 +1,8 @@
-﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
+// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
 namespace CultureList.ViewModels;
 
-internal partial class NavigationViewModel : ObservableObject
+internal sealed partial class NavigationViewModel : ObservableObject
 {
     #region Constructor
     public NavigationViewModel()

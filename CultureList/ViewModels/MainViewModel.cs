@@ -1,11 +1,11 @@
-﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
+// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
 namespace CultureList.ViewModels;
 
 /// <summary>
 /// ViewModel for the MainPage class.
 /// </summary>
-internal partial class MainViewModel : ObservableObject
+internal sealed class MainViewModel
 {
     #region Populate the collection with Culture Information
     /// <summary>

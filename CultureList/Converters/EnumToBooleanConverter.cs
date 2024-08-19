@@ -5,7 +5,7 @@ namespace CultureList.Converters;
 /// <summary>
 /// Converts an enum value to a boolean.
 /// </summary>
-internal class EnumToBooleanConverter : IValueConverter
+internal sealed class EnumToBooleanConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

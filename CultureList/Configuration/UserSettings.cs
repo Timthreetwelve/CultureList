@@ -3,7 +3,7 @@
 namespace CultureList.Configuration;
 
 [INotifyPropertyChanged]
-public partial class UserSettings : ConfigManager<UserSettings>
+public sealed partial class UserSettings : ConfigManager<UserSettings>
 {
     #region Properties (some with default values)
     /// <summary>
