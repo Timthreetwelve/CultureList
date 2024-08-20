@@ -44,4 +44,18 @@
     </DataTemplate>
     <!--#endregion-->
 
+    <!--#region DataGrid Cell style for right-to-left languages -->
+    <Style TargetType="DataGridCell" x:Key="RightToLeftCell"
+                               BasedOn="{StaticResource MaterialDesignDataGridCell}">
+        <Setter Property="FlowDirection" Value="LeftToRight" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding TextInfo.IsRightToLeft}"
+                                             Value="true">
+                <Setter Property="FlowDirection" Value="RightToLeft" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <!--#endregion-->
+
 </ResourceDictionary>
