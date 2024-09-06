@@ -47,7 +47,7 @@ public partial class MDCustMsgBox : Window
         #endregion Message text
 
         #region Message box title
-        TxtTitle.Text = (string.IsNullOrEmpty(Title)) ? Application.Current!.MainWindow!.Title : Title;
+        TxtTitle.Text = string.IsNullOrEmpty(Title) ? Application.Current!.MainWindow!.Title : Title;
         #endregion Message box title
 
         #region Button visibility
@@ -87,7 +87,7 @@ public partial class MDCustMsgBox : Window
         if (MsgBoxOwner != null)
         {
             Owner = MsgBoxOwner;
-            WindowStartupLocation = (Owner.IsVisible) ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen;
+            WindowStartupLocation = Owner.IsVisible ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen;
         }
         else
         {
