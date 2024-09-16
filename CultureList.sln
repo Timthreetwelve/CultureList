@@ -3,7 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CultureList", "CultureList\CultureList.csproj", "{E9968C5B-12A6-4F2F-94C5-7D6812B0A4CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CultureList", "CultureList\CultureList.csproj", "{E9968C5B-12A6-4F2F-94C5-7D6812B0A4CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3FD01853-59AC-4DED-9329-539D3C53C53D}"
+	ProjectSection(SolutionItems) = preProject
+		.github\dependabot.yml = .github\dependabot.yml
+		README.md = README.md
+		version.json = version.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
