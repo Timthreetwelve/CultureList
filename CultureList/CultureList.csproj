@@ -56,6 +56,11 @@
     <Exec Command="pwsh -NoProfile $(PowerShellScript) $(Name)" />
   </Target>
 
+  <!-- Build complete message -->
+  <Target Name="VersionMessage" AfterTargets="AfterBuild">
+    <Message Importance="high" Text="Build complete for $(AssemblyName). Assembly Version is $(AssemblyVersion)." />
+  </Target>
+  
   <!-- Publish to Zip file -->
   <Target Name="PublishZip" AfterTargets="Publish">
     <PropertyGroup>
