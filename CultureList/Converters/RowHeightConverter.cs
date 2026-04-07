@@ -17,8 +17,6 @@ internal sealed class RowHeightConverter : IValueConverter
                     return new GridLength(20);
                 case Spacing.Comfortable:
                     return new GridLength(26);
-                case Spacing.Wide:
-                    return new GridLength(30);
             }
         }
         return new GridLength(30);
