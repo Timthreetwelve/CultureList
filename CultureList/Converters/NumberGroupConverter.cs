@@ -12,7 +12,7 @@ internal sealed class NumberGroupConverter : IValueConverter
         if (value is string separator)
         {
             byte[] ba = Encoding.Default.GetBytes(separator);
-            return BitConverter.ToString(ba).Replace("-", "") switch
+            return System.Convert.ToHexString(ba) switch
             {
                 "C2A0" => GetStringResource("Details_NBSpaceChar"),
                 "E280AF" => GetStringResource("Details_NNBSpaceChar"),
