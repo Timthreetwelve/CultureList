@@ -77,8 +77,8 @@ internal sealed partial class UILanguage : ObservableObject
     /// </remarks>
     private static List<UILanguage> LanguageList { get; } =
     [
-        new UILanguage {Language = "English", LanguageCode = "en-US", LanguageNative = "English",    Contributor = "Timthreetwelve", Note="Default"},
-        new UILanguage {Language = "English", LanguageCode = "en-GB", LanguageNative = "English",    Contributor = "Timthreetwelve"},
+        new() {Language = "English", LanguageCode = "en-US", LanguageNative = "English",    Contributor = "Timthreetwelve", Note="Default"},
+        new() {Language = "English", LanguageCode = "en-GB", LanguageNative = "English",    Contributor = "Timthreetwelve"},
     ];
 
     /// <summary>
