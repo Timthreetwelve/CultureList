@@ -19,6 +19,9 @@ public partial class App : Application
         // Unhandled exception handler
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
+        // Listen for session ending events (logoff/shutdown)
+        SessionEnding += SystemEvents_SessionEnding;
+
         // Initialize settings so that saved language can be accessed below.
         ConfigHelpers.InitializeSettings();
 
@@ -184,7 +187,7 @@ public partial class App : Application
         }
         else
         {
-            string? t = args.ExceptionObject?.GetType().FullName ?? "null";
+            string t = args.ExceptionObject.GetType().FullName ?? "null";
             _log.Error($"Unhandled exception object is not of type Exception. Type: {t}");
             string msg = string.Format(CultureInfo.CurrentCulture,
                                        "MsgText_Error\nMsgText_Error_SeeLog");
@@ -266,6 +269,6 @@ public partial class App : Application
     /// <summary>
     /// Flag indicating if session is ending
     /// </summary>
-    public static bool SessionEndingFlag { get; set; }
+    private static bool SessionEndingFlag { get; set; }
     #endregion Properties
 }
