@@ -98,7 +98,7 @@ internal static class GitHubHelpers
     /// <param name="repoOwner">The repository owner.</param>
     /// <param name="repoName">Name of the repository.</param>
     /// <returns>Release object</returns>
-    private static async Task<Release> GetLatestReleaseAsync(string repoOwner, string repoName)
+    private static async Task<Release?> GetLatestReleaseAsync(string repoOwner, string repoName)
     {
         GitHubClient client = new(new ProductHeaderValue(repoName));
         _log.Debug("Checking GitHub for latest release.");
