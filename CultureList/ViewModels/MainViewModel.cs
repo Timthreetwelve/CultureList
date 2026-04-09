@@ -25,10 +25,7 @@ internal sealed class MainViewModel
     {
         CultureTypes types = CheckCultureType(UserSettings.Setting!.SelectedCultures);
         Cultures = new List<CultureInfo>([.. CultureInfo.GetCultures(types).OrderBy(static x => x.Name)]);
-        if (MainPage.Instance != null)
-        {
-            MainPage.Instance.CultureGrid.ItemsSource = Cultures;
-        }
+        MainPage.Instance?.CultureGrid.ItemsSource = Cultures;
         _log.Debug($"Loaded {Cultures.Count} {UserSettings.Setting.SelectedCultures} items.");
     }
     #endregion Populate the collection with Culture Information
