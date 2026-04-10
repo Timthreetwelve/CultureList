@@ -11,14 +11,14 @@
 ;             PublishFolder:    The output folder from MS Build.
 ;                               Varies depending on the type of build.
 ;----------------------------------------------------------------------
-#include "D:\Temp\PubSetup.Temp.iss"
+#include "C:\Users\kenne\AppData\Local\Temp\PubSetup.Temp.iss"
 
 #define BaseDir              "V:\Source\Repos\CultureList\CultureList"
 #define MySourceDir          BaseDir + PublishFolder
 #define MySetupIcon          BaseDir + "\Images\CL.ico"
-#define MyOutputDir          "D:\InnoSetup\Output"
-#define MyLargeImage         "D:\InnoSetup\Images\WizardImage.bmp"
-#define MySmallImage         "D:\InnoSetup\Images\WizardSmallImage.bmp"
+#define MyOutputDir          "V:\InnoSetup\Output"
+#define MyLargeImage         "V:\InnoSetup\Images\WizardImage.bmp"
+#define MySmallImage         "V:\InnoSetup\Images\WizardSmallImage.bmp"
 
 #define MyAppID              "{46EA0429-3E19-436C-A890-4A9E6CFA9D6A}"
 #define MyAppName            "Culture List"
@@ -31,7 +31,6 @@
 #define StartCopyrightYear   "2024"
 #define CurrentYear          GetDateTimeString('yyyy', '/', ':')
 #define MyCopyright          "(c) " + StartCopyrightYear + "-" + CurrentYear + " Tim Kennedy"
-#define MyLicFile            "D:\Visual Studio\Resources\License.rtf"
 #define MyDateTimeString     GetDateTimeString('yyyy/mm/dd hh:nn:ss', '/', ':')
 #define MyAppSupportURL      "https://github.com/Timthreetwelve/CultureList"
 #define RunRegKey            "Software\Microsoft\Windows\CurrentVersion\Run"
@@ -125,7 +124,7 @@ Root: HKCU; Subkey: "Software\{#MyCompanyName}\{#MyAppName}"; ValueType: string;
 Root: HKCU; Subkey: "Software\{#MyCompanyName}\{#MyAppName}"; ValueType: none; ValueName: "Edition"; Flags: uninsdeletekey deletevalue
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent unchecked shellexec
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent shellexec
 Filename: "{app}\ReadMe.txt"; Description: "{cm:ViewReadme}"; Flags: nowait postinstall skipifsilent unchecked shellexec
 
 [UninstallRun]
