@@ -11,7 +11,9 @@
 ;             PublishFolder:    The output folder from MS Build.
 ;                               Varies depending on the type of build.
 ;----------------------------------------------------------------------
-#include "C:\Users\kenne\AppData\Local\Temp\PubSetup.Temp.iss"
+#define TempDir              GetEnv("TEMP")
+#define IncludeFile          TempDir + "\PubSetup.Temp.iss"
+#include IncludeFile
 
 #define BaseDir              "V:\Source\Repos\CultureList\CultureList"
 #define MySourceDir          BaseDir + PublishFolder
@@ -63,18 +65,18 @@ AppCopyright={#MyCopyright}
 AppPublisherURL={#MyAppSupportURL}
 AppSupportURL={#MyAppSupportURL}
 AppUpdatesURL={#MyAppSupportURL}
+AppPublisher={#MyPublisherName}
 
 VersionInfoDescription={#MyAppName} installer
 VersionInfoProductName={#MyAppName}
 VersionInfoVersion={#MyAppVersion}
 
-UninstallDisplayName={#MyAppName}
+UninstallDisplayName={#MyAppName} {#MyAppVersion}
 UninstallDisplayIcon={app}\{#MyAppExeName}
-AppPublisher={#MyPublisherName}
 
 ShowLanguageDialog=yes
 UsePreviousLanguage=no
-WizardStyle=modern
+WizardStyle=dynamic windows11 includetitlebar
 WizardSizePercent=100,100
 ;WizardImageFile={#MyLargeImage}
 ;WizardSmallImageFile={#MySmallImage}
