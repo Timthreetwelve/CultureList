@@ -10,7 +10,7 @@
 <div align="center">
   
 [![GitHub](https://img.shields.io/github/license/Timthreetwelve/CultureList?style=plastic&color=seagreen)](https://github.com/Timthreetwelve/CultureList/blob/main/LICENSE)
-[![NET8win](https://img.shields.io/badge/.NET-8.0--Windows-blueviolet?style=plastic)](https://dotnet.microsoft.com/en-us/download) 
+[![NET8win](https://img.shields.io/badge/.NET-10.0--Windows-blueviolet?style=plastic)](https://dotnet.microsoft.com/en-us/download) 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Timthreetwelve/CultureList?style=plastic)](https://github.com/Timthreetwelve/CultureList/releases/latest) 
 [![GitHub Release Date](https://img.shields.io/github/release-date/timthreetwelve/CultureList?style=plastic&color=orange)](https://github.com/Timthreetwelve/CultureList/releases/latest) 
 [![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/timthreetwelve/CultureList/latest?style=plastic)](https://github.com/Timthreetwelve/CultureList/commits/main)
@@ -33,6 +33,10 @@ Culture List will display a subset of the culture information found in `System.G
 - Choose a font that works best for you.
 - Quickly filter the list
 - Easily copy text
+
+
+### Culture List runs on .NET 10. 
+Self-contained versions are available if .NET 10 isn't installed. See the [releases page](https://github.com/Timthreetwelve/CultureList/releases).
 
 ## Screenshots
 
