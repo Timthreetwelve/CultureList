@@ -18,7 +18,7 @@
 #define BaseDir              "V:\Source\Repos\CultureList\CultureList"
 #define MySourceDir          BaseDir + PublishFolder
 #define MySetupIcon          BaseDir + "\Images\CL.ico"
-#define MyOutputDir          "V:\InnoSetup\Output"
+#define MyOutputDir          "V:\Releases\Installer"
 #define MyLargeImage         "V:\InnoSetup\Images\WizardImage.bmp"
 #define MySmallImage         "V:\InnoSetup\Images\WizardSmallImage.bmp"
 
