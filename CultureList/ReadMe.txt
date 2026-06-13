@@ -100,13 +100,11 @@ Culture List uses the following packages:
 
     * NLog https://nlog-project.org/
 
-    * GitVersion https://github.com/GitTools/GitVersion
-
     * OctoKit https://github.com/octokit/octokit.net
 
     * Vanara https://github.com/dahall/vanara
 
-    * GitKraken was used for everything Git related. https://www.gitkraken.com/
+    * VersionInfoGenerator https://github.com/notpeelz/VersionInfoGenerator
 
     * Inno Setup was used to create the installer. https://jrsoftware.org/isinfo.php
 
