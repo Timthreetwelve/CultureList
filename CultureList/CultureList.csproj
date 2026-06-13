@@ -13,41 +13,49 @@
     <Company>T_K</Company>
     <Product>Culture List</Product>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <AnalysisMode>Recommended</AnalysisMode>
-    <AnalysisLevel>10.0</AnalysisLevel>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Resource Include="Images\globe.png" />
-    <Resource Include="Images\CL.png" />
-  </ItemGroup>
-
+  <!-- Set version and prerelease string (if needed) -->
+  <PropertyGroup>
+    <VersionValidate>true</VersionValidate>
+    <Version>0.4.1</Version>
+    <VersionPrerelease></VersionPrerelease>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration) == 'Debug'">
+    <VersionInfoGenerateJson>true</VersionInfoGenerateJson>
+  </PropertyGroup>
+  
+  <!-- Analyzers -->
+  <PropertyGroup>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+  
+  <!-- NuGet Packages -->
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="MaterialDesignThemes" Version="5.3.2" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.9.50">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="VersionInfoGenerator" Version="3.2.1" PrivateAssets="all"/>
     <PackageReference Include="NLog" Version="6.1.3" />
     <PackageReference Include="Octokit" Version="14.0.0" />
     <PackageReference Include="Vanara.PInvoke.User32" Version="5.0.5" />
   </ItemGroup>
 
+  <!-- Files to copy -->
   <ItemGroup>
-    <None Update="LICENSE.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="ReadMe.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="Strings.test.xaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="LICENSE.txt" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Readme.txt" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Strings.test.xaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!-- Resources to include -->
+  <ItemGroup>
+    <Resource Include="Images\globe.png" />
+    <Resource Include="Images\CL.png" />
   </ItemGroup>
 
   <!-- Generate BuildInfo.cs-->
-  <Target Name="BuildInfo" AfterTargets="BeforeBuild">
+  <Target Name="BuildInfo" AfterTargets="VersionInfoGenerator_UpdateProperties">
     <Message Importance="high" Text="Beginning GenBuildInfo for $(AssemblyName)." />
     <PropertyGroup>
       <PowerShellScript>-File "$(ProjectDir)PowerShell\GenBuildInfo.ps1"</PowerShellScript>
@@ -56,60 +64,14 @@
     <Exec Command="pwsh -NoProfile $(PowerShellScript) $(Name)" />
   </Target>
 
-  <!-- Build complete message -->
+  <!-- Build complete messages -->
   <Target Name="VersionMessage" AfterTargets="AfterBuild">
-    <Message Importance="high" Text="Build complete for $(AssemblyName). Assembly Version is $(AssemblyVersion)." />
+    <Message Importance="high" Text="Assembly Version is $(AssemblyVersion)" />
+    <Message Importance="high" Text="Version is $(Version)" />
+    <Message Importance="high" Text="Commit is $(GitRevShort)" />
+    <Message Importance="high" Condition="'$(VersionPrerelease)' != ''" Text="Build is Prerelease" />
   </Target>
   
-  <!-- Publish to Zip file -->
-  <Target Name="PublishZip" AfterTargets="Publish">
-    <PropertyGroup>
-      <PowerShellScript>-File "V:\Source\Repos\PublishZip\PubZipEx.ps1"</PowerShellScript>
-      <Name>-name "Culture List"</Name>
-      <Version>-version $(AssemblyVersion)</Version>
-      <Path>-path "$(ProjectDir)"</Path>
-      <PublishFolder>-pubDir $(PublishDir)</PublishFolder>
-    </PropertyGroup>
-    <!-- This is the framework dependent version -->
-    <PropertyGroup Condition="'$(PublishDir.Contains(`Framework_Dependent`))'">
-      <PubType>-pubType "x64x86"</PubType>
-    </PropertyGroup>
-    <!-- This is the x64 self contained version-->
-    <PropertyGroup Condition="'$(PublishDir.Contains(`Self_Contained_x64`))'">
-      <PubType>-pubType SC_x64</PubType>
-    </PropertyGroup>
-    <!-- This is the x86 self contained version-->
-    <PropertyGroup Condition="'$(PublishDir.Contains(`Self_Contained_x86`))'">
-      <PubType>-pubType SC_x86</PubType>
-    </PropertyGroup>
-    <!-- Execute the PowerShell script -->
-    <Exec Command="pwsh -NoProfile $(PowerShellScript) $(Name) $(Version) $(PubType) $(PublishFolder) $(Path)" />
-  </Target>
-
-  <!-- Publish to Inno Setup installer-->
-  <Target Name="CompileSetup" AfterTargets="PublishZip">
-    <PropertyGroup>
-      <PowerShellScript>-File "V:\Source\Repos\PublishInnoSetup\PubSetupEx.ps1"</PowerShellScript>
-      <ScriptName>-issScript "$(ProjectDir)Inno_Setup\CultureListEx.iss"</ScriptName>
-      <Name>-name "Culture List"</Name>
-      <Version>-version $(AssemblyVersion)</Version>
-    </PropertyGroup>
-    <!-- This is the framework dependent version -->
-    <PropertyGroup Condition="'$(PublishDir.Contains(`Framework_Dependent`))'">
-      <PubType>-publishType "x64x86"</PubType>
-    </PropertyGroup>
-    <!-- This is the x64 self contained version-->
-    <PropertyGroup Condition="'$(PublishDir.Contains(`Self_Contained_x64`))'">
-      <PubType>-publishType SC_x64</PubType>
-    </PropertyGroup>
-    <!-- This is the x86 self contained version-->
-    <PropertyGroup Condition="'$(PublishDir.Contains(`Self_Contained_x86`))'">
-      <PubType>-publishType SC_x86</PubType>
-    </PropertyGroup>
-    <!-- Execute the PowerShell script -->
-    <Exec Command="pwsh -NoProfile $(PowerShellScript) $(ScriptName) $(PublishDir) $(PubType) $(version) $(Name)" />
-  </Target>
-
   <!-- Remove obj folder after Clean -->
   <Target Name="SpicNSpan" AfterTargets="AfterClean">
     <Message Importance="high" Text="obj folder deleted." />
