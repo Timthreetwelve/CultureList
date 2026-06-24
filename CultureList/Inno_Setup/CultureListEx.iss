@@ -21,7 +21,7 @@
 #include IncludeFile
 
 #define BaseDir              "V:\Source\Repos\CultureList\CultureList"
-#define MySourceDir          BaseDir + PublishFolder
+#define MySourceDir          PublishFolder
 #define MySetupIcon          BaseDir + "\Images\CL.ico"
 #define MyOutputDir          "V:\Releases\Installer"
 #define MyLargeImage         "V:\InnoSetup\Images\WizardImage.bmp"
