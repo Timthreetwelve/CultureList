@@ -28,11 +28,11 @@ internal static class BuildInfo
             DateTime.ParseExact(BuildDateString, `"yyyy/MM/dd HH:mm:ss`", CultureInfo.InvariantCulture),
             DateTimeKind.Utc);
 
-    public static readonly string BuildDateStringUtc = $`"{BuildDateUtc:f}  (UTC)`";
+    public static readonly string BuildDateStringUtc = `$`"{BuildDateUtc:f}  (UTC)`";
 
-       public static readonly string VersionString = string.IsNullOrWhiteSpace(Prerelease)
+    public static readonly string VersionString = string.IsNullOrWhiteSpace(Prerelease)
         ? VersionInfo.Version
-        : $`"{VersionInfo.Version}-{Prerelease}`";
+        : `$`"{VersionInfo.Version}-{Prerelease}`";
 }"
 
 $outputPath = Join-Path -Path $(Get-Location).Path -ChildPath $outputFile
