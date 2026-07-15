@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <AssemblyName>CultureList</AssemblyName>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
+    <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
     <ApplicationIcon>Images\CL.ico</ApplicationIcon>
     <Description>Culture Information</Description>
     <Copyright>© $([System.DateTime]::UtcNow.Year) Tim Kennedy</Copyright>
@@ -21,16 +21,26 @@
     <Version>0.4.2</Version>
     <VersionPrerelease></VersionPrerelease>
   </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration) == 'Debug'">
-    <VersionInfoGenerateJson>true</VersionInfoGenerateJson>
-  </PropertyGroup>
   
   <!-- Analyzers -->
   <PropertyGroup>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
   </PropertyGroup>
+
+  <!-- Resources to include -->
+  <ItemGroup>
+    <Resource Include="Images\globe.png" />
+    <Resource Include="Images\CL.png" />
+  </ItemGroup>
   
+  <!-- Files to copy -->
+  <ItemGroup>
+    <Content Include="LICENSE.txt" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Readme.txt" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Strings.test.xaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
   <!-- NuGet Packages -->
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
@@ -39,19 +49,6 @@
     <PackageReference Include="NLog" Version="6.1.4" />
     <PackageReference Include="Octokit" Version="14.0.0" />
     <PackageReference Include="Vanara.PInvoke.User32" Version="5.0.5" />
-  </ItemGroup>
-
-  <!-- Files to copy -->
-  <ItemGroup>
-    <Content Include="LICENSE.txt" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Readme.txt" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Strings.test.xaml" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
-  <!-- Resources to include -->
-  <ItemGroup>
-    <Resource Include="Images\globe.png" />
-    <Resource Include="Images\CL.png" />
   </ItemGroup>
 
   <!-- Generate BuildInfo.cs-->
@@ -64,17 +61,18 @@
     <Exec Command="pwsh -NoProfile $(PowerShellScript) $(Name)" />
   </Target>
 
-  <!-- Build complete messages -->
+  <!-- Build complete message -->
   <Target Name="VersionMessage" AfterTargets="AfterBuild">
     <Message Importance="high" Text="Assembly Version is $(AssemblyVersion)" />
     <Message Importance="high" Text="Version is $(Version)" />
-    <Message Importance="high" Text="Commit is $(GitRevShort)" />
+    <Message Importance="high" Text="Commit date is $(GitCommitterDate)" />
+    <Message Importance="high" Text="Commit ID is $(GitRevShort)" />
     <Message Importance="high" Condition="'$(VersionPrerelease)' != ''" Text="Build is Prerelease" />
   </Target>
-  
+
   <!-- Remove obj folder after Clean -->
-  <Target Name="SpicNSpan" AfterTargets="AfterClean">
-    <Message Importance="high" Text="obj folder deleted." />
+  <Target Name="MrClean" AfterTargets="AfterClean">
+    <Message Importance="high" Text="The obj folder has been deleted." />
     <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
   </Target>
   
