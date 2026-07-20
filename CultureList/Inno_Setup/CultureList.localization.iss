@@ -1,10 +1,11 @@
-; Inno Setup Localization file format
+﻿; Inno Setup Localization file format
 ;
 ; Sections are in this order: LangOptions, Languages, Messages, CustomMessages
 ; Section headers are case-sensitive and should not be altered
 ; Sections are separated by two lines consisting of ";" (the comment character) to give visual separation in the file
 ; Items in the  LangOptions, Languages, and CustomMessages sections are ordered with "en" first, 
 ; then the other languages in alphabetical order by language code
+; Messages in the CustomMessages sections are sorted by key
 ; Line endings are CRLF
 ; File encoding is UTF-8 with BOM
 ;
