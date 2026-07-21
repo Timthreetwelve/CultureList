@@ -45,7 +45,7 @@
 ; -----------------------------------------------------
 ; Include the localization file. Thanks bovirus!
 ; -----------------------------------------------------
-#include "CultureListLocalization.iss"
+#include "CultureList.localization.iss"
 
 
 [Setup]
@@ -222,7 +222,6 @@ begin
           mres := MsgBox(CustomMessage('DeleteConfigFiles'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2)
           if mres = IDYES then
           begin
-            DelTree(ExpandConstant('{app}\*.json'), False, True, False);
             DelTree(ExpandConstant('{app}'), True, True, True);
           end;
        end;
