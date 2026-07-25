@@ -15,14 +15,14 @@
 
         Translation contributed by:  Timthreetwelve
 
-        Date last update:            2024-07-27
+        Date last update:            2026-07-25
 
         ======================================================================
 
     -->
 
     <!--  About Page  -->
-    <sys:String x:Key="About_BuildDate">Build Date</sys:String>
+    <sys:String x:Key="About_BuildDate">Commit Date</sys:String>
     <sys:String x:Key="About_CommitID">Commit ID</sys:String>
     <sys:String x:Key="About_CommitIDToolTip">Full Commit ID:</sys:String>
     <sys:String x:Key="About_Contribute">Contribute a Translation</sys:String>
