@@ -81,6 +81,18 @@ public sealed partial class UserSettings : ConfigManager<UserSettings>
     private bool _startCentered;
 
     /// <summary>
+    /// Theme to use for light mode when ThemeType.System is selected.
+    /// </summary>
+    [ObservableProperty]
+    private ThemeType _systemLightTheme = ThemeType.Light;
+
+    /// <summary>
+    /// Theme to use for dark mode when ThemeType.System is selected.
+    /// </summary>
+    [ObservableProperty]
+    private ThemeType _systemDarkTheme = ThemeType.Darker;
+
+    /// <summary>
     /// Defined language to use in the UI.
     /// </summary>
     [ObservableProperty]

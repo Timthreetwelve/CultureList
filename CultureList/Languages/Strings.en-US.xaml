@@ -174,7 +174,9 @@
     <sys:String x:Key="SettingsEnum_Spacing_Wide">Wide</sys:String>
     <sys:String x:Key="SettingsEnum_Theme_Dark">Material Dark</sys:String>
     <sys:String x:Key="SettingsEnum_Theme_Darker">Darker</sys:String>
+    <sys:String x:Key="SettingsEnum_Theme_DarkBlue">Midnight Blue</sys:String>
     <sys:String x:Key="SettingsEnum_Theme_Light">Light</sys:String>
+    <sys:String x:Key="SettingsEnum_Theme_LightGray">Pale Graphite</sys:String>
     <sys:String x:Key="SettingsEnum_Theme_System">System</sys:String>
     <!--  Settings Page Items  -->
     <sys:String x:Key="SettingsItem_DisplayNameColumn">Name column to show</sys:String>
@@ -227,9 +229,11 @@
     <!-- * | Initial release on GitHub -->
     <!-- End changes on 2024/07/27 @ 19:25 UTC  -->
 
-    <!-- Begin changes on 2026/07/25 @ 19:25 UTC  -->
+    <!-- Begin changes on 2026/07/25 @ 00:00 UTC  -->
     <!-- A | MsgText_CopyToClipboardFail -->
     <!-- U | About_BuildDate - Changed 'Build' to 'Commit' -->
     <!-- U | MsgText_AppUpdateCheckFailed - Added xml:space="preserve" and line break character &#x0a;  -->
-    <!-- Begin changes on 2026/07/25 @ 19:25 UTC  -->
+    <!-- A | SettingsEnum_Theme_DarkBlue  -->
+    <!-- A | SettingsEnum_Theme_LightGray  -->
+    <!-- Begin changes on 2026/07/25 @ 00:00 UTC  -->
 </ResourceDictionary>

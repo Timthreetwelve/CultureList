@@ -220,11 +220,16 @@
                             <Label Grid.Row="0" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Content="{DynamicResource SettingsItem_Theme}" />
-                            <ComboBox Grid.Row="0" Grid.Column="2"
-                                      ItemsSource="{Binding Source={convert:EnumBindingSource {x:Type models:ThemeType}}}"
-                                      SelectedItem="{Binding UITheme,
-                                                             Source={x:Static config:UserSettings.Setting}}"
-                                      Style="{StaticResource SettingsComboBox}" />
+                            <StackPanel Grid.Row="0" Grid.Column="2">
+                                <StackPanel.DataContext>
+                                    <viewmodels:SettingsViewModel />
+                                </StackPanel.DataContext>
+                                <ComboBox Grid.Row="0" Grid.Column="2"
+                                          ItemsSource="{Binding ThemeTypes}"
+                                          SelectedItem="{Binding UITheme,
+                                                                 Source={x:Static config:UserSettings.Setting}}"
+                                          Style="{StaticResource SettingsComboBox}" />
+                            </StackPanel>
 
                             <Label Grid.Row="1" Grid.Column="0"
                                    VerticalAlignment="Center"
@@ -260,11 +265,11 @@
                                    Content="Font" />
 
                             <ComboBox Grid.Row="4" Grid.Column="2"
-                                      Style="{StaticResource SettingsComboBox}"
                                       ItemsSource="{Binding FontList}"
                                       SelectedValue="{Binding SelectedFont,
                                                               Source={x:Static config:UserSettings.Setting}}"
-                                      SelectedValuePath="Source" />
+                                      SelectedValuePath="Source"
+                                      Style="{StaticResource SettingsComboBox}" />
                         </Grid>
 
                         <Grid Grid.Row="2" Grid.Column="1">
@@ -387,15 +392,14 @@
                                    Content="{DynamicResource SettingsItem_Language}"
                                    ToolTipService.InitialShowDelay="300"
                                    ToolTipService.Placement="Top" />
-                            <ComboBox 
-                                      Grid.Column="2"
+                            <ComboBox Grid.Column="2"
                                       IsEnabled="{Binding Path=UseOSLanguage,
                                                           Source={x:Static config:UserSettings.Setting},
                                                           Converter={StaticResource BoolInverter}}"
                                       ItemsSource="{Binding DefinedLanguages}"
-                                      SelectedValuePath="LanguageCode"
                                       SelectedValue="{Binding Path=UILanguage,
-                                                             Source={x:Static config:UserSettings.Setting}}"
+                                                              Source={x:Static config:UserSettings.Setting}}"
+                                      SelectedValuePath="LanguageCode"
                                       Style="{StaticResource SettingsComboBox}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
