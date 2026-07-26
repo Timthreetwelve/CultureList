@@ -218,24 +218,16 @@
                                 <ColumnDefinition Width="10" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Grid.DataContext>
-                                <viewmodels:SettingsViewModel />
-                            </Grid.DataContext>
                             <!--#endregion-->
 
                             <Label Grid.Row="0" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Content="{DynamicResource SettingsItem_Theme}" />
-                            <StackPanel Grid.Row="0" Grid.Column="2">
-                                <StackPanel.DataContext>
-                                    <viewmodels:SettingsViewModel />
-                                </StackPanel.DataContext>
-                                <ComboBox Grid.Row="0" Grid.Column="2"
-                                          ItemsSource="{Binding ThemeTypes}"
-                                          SelectedItem="{Binding UITheme,
-                                                                 Source={x:Static config:UserSettings.Setting}}"
-                                          Style="{StaticResource SettingsComboBox}" />
-                            </StackPanel>
+                            <ComboBox Grid.Row="0" Grid.Column="2"
+                                      ItemsSource="{Binding ThemeTypes}"
+                                      SelectedItem="{Binding UITheme,
+                                                             Source={x:Static config:UserSettings.Setting}}"
+                                      Style="{StaticResource SettingsComboBox}" />
                             <Label Grid.Row="1" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Content="{DynamicResource SettingsItem_LightModeTheme}"

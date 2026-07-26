@@ -22,10 +22,10 @@ internal static class PathHelpers
         }
 
         string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        if (!path.StartsWith(userProfile, StringComparison.CurrentCultureIgnoreCase))
+        if (!path.StartsWith(userProfile, StringComparison.OrdinalIgnoreCase))
         {
             return path;
         }
-        return path.Replace(userProfile, "%USERPROFILE%");
+        return path.Replace(userProfile, "%USERPROFILE%", StringComparison.OrdinalIgnoreCase);
     }
 }

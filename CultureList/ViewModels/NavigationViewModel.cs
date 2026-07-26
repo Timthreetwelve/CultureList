@@ -148,7 +148,7 @@ internal sealed partial class NavigationViewModel : ObservableObject
             if (await ClipboardHelper.CopyTextToClipboardAsync(text.Text))
             {
                 SnackbarMsg.ClearAndQueueMessage(GetStringResource("MsgText_CopiedToClipboardItem"));
-                _log.Debug($"{text.Text.Length} bytes copied to the clipboard");
+                _log.Debug($"{text.Text.Length} characters copied to the clipboard");
             }
             else
             {
@@ -157,13 +157,16 @@ internal sealed partial class NavigationViewModel : ObservableObject
             }
 
             DataGridRow dgr = MainWindowHelpers.FindParent<DataGridRow>(text);
-            dgr.IsSelected = false;
-            DataGrid dg = MainWindowHelpers.FindParent<DataGrid>(dgr);
-            dg.Items.Refresh();
+            if (dgr != null)
+            {
+                dgr.IsSelected = false;
+                DataGrid dg = MainWindowHelpers.FindParent<DataGrid>(dgr);
+                dg.Items.Refresh();
+            }
         }
         catch (Exception ex)
         {
-            _log.Error($"Right-click event handler failed. {ex.Message}");
+            _log.Error(ex, $"Right-click event handler failed. {ex.Message}");
             SnackbarMsg.ClearAndQueueMessage(GetStringResource("MsgText_CopyToClipboardFail"));
         }
     }

@@ -53,7 +53,7 @@ public static class TextFileViewer
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Error);
 #endif
-                _log.Error($"Unable to open {fname}. {ex.Message}");
+                _log.Error(ex, $"Unable to open {fname}. {ex.Message}");
             }
         }
         catch (Exception ex)

@@ -117,7 +117,7 @@
                            Text="{DynamicResource About_BuildDate}" />
                 <StackPanel Grid.Row="5" Grid.Column="2"
                             Orientation="Horizontal">
-                    <TextBlock Text="{Binding Source={x:Static local:BuildInfo.CommitDateStringUtc}}" />
+                    <TextBlock Text="{Binding Source={x:Static local:BuildInfo.CommitDateUtc}, StringFormat='{}{0:f} (UTC)'}" />
                 </StackPanel>
 
                 <TextBlock Grid.Row="6" Grid.Column="0"
