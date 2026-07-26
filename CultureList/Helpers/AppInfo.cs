@@ -8,6 +8,11 @@ namespace CultureList.Helpers;
 public static class AppInfo
 {
     /// <summary>
+    /// Returns the process architecture e.g. X64, Arm64, etc.
+    /// </summary>
+    public static string Architecture => RuntimeInformation.ProcessArchitecture.ToString();
+
+    /// <summary>
     /// Returns the operating system description e.g. Microsoft Windows 10.0.19044
     /// </summary>
     public static string OsPlatform => RuntimeInformation.OSDescription;
