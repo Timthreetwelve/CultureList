@@ -136,22 +136,35 @@ internal sealed partial class NavigationViewModel : ObservableObject
     /// </summary>
     /// <param name="e">Mouse button event args</param>
     [RelayCommand]
-    private static void RightMouseUp(MouseButtonEventArgs e)
+    private static async Task RightMouseUp(MouseButtonEventArgs e)
     {
-        if (e.OriginalSource is TextBlock text)
+        if (e.OriginalSource is not TextBlock text)
         {
-            try
+            return;
+        }
+
+        try
+        {
+            if (await ClipboardHelper.CopyTextToClipboardAsync(text.Text))
             {
-                // Copy to clipboard and display message.
-                if (ClipboardHelper.CopyTextToClipboard(text.Text))
-                {
-                    SnackbarMsg.ClearAndQueueMessage(GetStringResource("MsgText_CopiedToClipboardItem"));
-                }
+                SnackbarMsg.ClearAndQueueMessage(GetStringResource("MsgText_CopiedToClipboardItem"));
+                _log.Debug($"{text.Text.Length} bytes copied to the clipboard");
             }
-            catch (Exception ex)
+            else
             {
-                _log.Error(ex, $"Right-click event handler failed. {ex.Message}");
+                _log.Error("RightMouseUp clipboard copy failed.");
+                SnackbarMsg.ClearAndQueueMessage(GetStringResource("MsgText_CopyToClipboardFail"));
             }
+
+            DataGridRow dgr = MainWindowHelpers.FindParent<DataGridRow>(text);
+            dgr.IsSelected = false;
+            DataGrid dg = MainWindowHelpers.FindParent<DataGrid>(dgr);
+            dg.Items.Refresh();
+        }
+        catch (Exception ex)
+        {
+            _log.Error($"Right-click event handler failed. {ex.Message}");
+            SnackbarMsg.ClearAndQueueMessage(GetStringResource("MsgText_CopyToClipboardFail"));
         }
     }
     #endregion Right mouse button

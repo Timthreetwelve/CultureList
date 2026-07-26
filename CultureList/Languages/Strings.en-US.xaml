@@ -105,6 +105,7 @@
     <sys:String x:Key="MsgText_AppUpdateNoneFound">No newer releases were found.</sys:String>
     <sys:String x:Key="MsgText_AppUpdateTagNotFound">Release tag was not found.</sys:String>
     <sys:String x:Key="MsgText_CopiedToClipboardItem">Item was copied to the clipboard</sys:String>
+    <sys:String x:Key="MsgText_CopyToClipboardFail">Copy to clipboard failed</sys:String>
     <sys:String x:Key="MsgText_CopyToolTip">Copy any value on this page by right-clicking on the text.</sys:String>
     <sys:String x:Key="MsgText_CulturesToolTip">Change displayed cultures in Application Settings.</sys:String>
     <sys:String x:Key="MsgText_ElapsedTime">Elapsed time</sys:String>
@@ -227,6 +228,7 @@
     <!-- End changes on 2024/07/27 @ 19:25 UTC  -->
 
     <!-- Begin changes on 2026/07/25 @ 19:25 UTC  -->
+    <!-- A | MsgText_CopyToClipboardFail -->
     <!-- U | About_BuildDate - Changed 'Build' to 'Commit' -->
     <!-- U | MsgText_AppUpdateCheckFailed - Added xml:space="preserve" and line break character &#x0a;  -->
     <!-- Begin changes on 2026/07/25 @ 19:25 UTC  -->
