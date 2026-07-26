@@ -160,8 +160,8 @@ internal sealed partial class NavigationViewModel : ObservableObject
             if (dgr != null)
             {
                 dgr.IsSelected = false;
-                DataGrid dg = MainWindowHelpers.FindParent<DataGrid>(dgr);
-                dg.Items.Refresh();
+                DataGrid? dg = MainWindowHelpers.FindParent<DataGrid>(dgr);
+                dg?.Items.Refresh();
             }
         }
         catch (Exception ex)

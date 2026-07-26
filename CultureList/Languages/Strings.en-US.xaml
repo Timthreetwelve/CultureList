@@ -239,5 +239,5 @@
     <!-- A | SettingsItem_LightModeTheme  -->
     <!-- U | About_BuildDate - Changed 'Build' to 'Commit' -->
     <!-- U | MsgText_AppUpdateCheckFailed - Added xml:space="preserve" and line break character &#x0a;  -->
-    <!-- Begin changes on 2026/07/25 @ 00:00 UTC  -->
+    <!-- End changes on 2026/07/25 @ 00:00 UTC  -->
 </ResourceDictionary>

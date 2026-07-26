@@ -108,7 +108,7 @@ pt.ViewReadme=Ver o arquivo leiame
 ;
 ;
 sk.AppIsRunning=beží, zatvorte ho, aby ste mohli pokračovať v inštalácii.
-sk.DeleteConfigFiles=Chcete odstrániť súbory nastavení?%n%nAk plánujete preinštalovať, vyberte 'Nie'.
+sk.DeleteConfigFiles=Chcete odstrániť súbory nastavení a histórie a položky registra?%n%nAk plánujete preinštalovať program, vyberte 'Nie'.
 sk.NotSelfContained64=Týmto sa nainštaluje x64 (64-bitová) verzia %1 verzie %2 závislá od frameworku.%n%nTáto verzia vyžaduje existujúcu inštaláciu .NET 10 Desktop Runtime.%n%nPred pokračovaním sa odporúča zatvoriť všetky ostatné aplikácie.%n%nKliknite na tlačidlo „Ďalej“ pre pokračovanie alebo na tlačidlo „Zrušiť“ pre ukončenie inštalácie.
 sk.SelfContainedx64=Týmto sa nainštaluje samostatná x64 (64-bitová) verzia %1 verzie %2.%n%nPred pokračovaním sa odporúča zatvoriť všetky ostatné aplikácie.%n%nKliknite na tlačidlo „Ďalej“ pre pokračovanie alebo na tlačidlo „Zrušiť“ pre ukončenie inštalácie.
 sk.ViewReadme=Zobraziť súbor ReadMe
