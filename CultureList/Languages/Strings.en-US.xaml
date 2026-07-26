@@ -15,7 +15,7 @@
 
         Translation contributed by:  Timthreetwelve
 
-        Date last update:            2026-07-25
+        Date last update:            See change log below
 
         ======================================================================
 
@@ -97,7 +97,7 @@
     <!--  Text found in messages (log, message box, status bar, details area, etc.)  -->
     <sys:String x:Key="MsgText_ApplicationShutdown">is shutting down</sys:String>
     <sys:String x:Key="MsgText_ApplicationStarting">is starting up</sys:String>
-    <sys:String x:Key="MsgText_AppUpdateCheckFailed">Check for update failed. See the log for more information.</sys:String>
+    <sys:String x:Key="MsgText_AppUpdateCheckFailed" xml:space="preserve">Check for update failed.&#x0a;See the log for more information.</sys:String>
     <sys:String x:Key="MsgText_AppUpdateChecking">Checking for update.</sys:String>
     <sys:String x:Key="MsgText_AppUpdateCloseApp">Clicking 'Yes' will close Culture List.</sys:String>
     <sys:String x:Key="MsgText_AppUpdateGoToRelease">Do you want to go to the release page?</sys:String>
@@ -225,4 +225,9 @@
     <!-- Begin changes on 2024/07/27 @ 19:25 UTC  -->
     <!-- * | Initial release on GitHub -->
     <!-- End changes on 2024/07/27 @ 19:25 UTC  -->
+
+    <!-- Begin changes on 2026/07/25 @ 19:25 UTC  -->
+    <!-- U | About_BuildDate - Changed 'Build' to 'Commit' -->
+    <!-- U | MsgText_AppUpdateCheckFailed - Added xml:space="preserve" and line break character &#x0a;  -->
+    <!-- Begin changes on 2026/07/25 @ 19:25 UTC  -->
 </ResourceDictionary>
