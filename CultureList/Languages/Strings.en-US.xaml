@@ -183,10 +183,12 @@
     <sys:String x:Key="SettingsItem_CulturesToInclude">Cultures to include</sys:String>
     <sys:String x:Key="SettingsItem_AccentColor">Accent Color</sys:String>
     <sys:String x:Key="SettingsItem_ChangingLanguageWarning">Changing Language will cause application to restart!</sys:String>
+    <sys:String x:Key="SettingsItem_DarkModeTheme">Dark Mode Theme</sys:String>
     <sys:String x:Key="SettingsItem_EnableLanguageTesting">Enable language testing</sys:String>
     <sys:String x:Key="SettingsItem_IncludeDebug">Include debug level messages in log file</sys:String>
     <sys:String x:Key="SettingsItem_KeepOnTop">Keep Culture List on top of other windows</sys:String>
     <sys:String x:Key="SettingsItem_Language">Language</sys:String>
+    <sys:String x:Key="SettingsItem_LightModeTheme">Light Mode Theme</sys:String>
     <sys:String x:Key="SettingsItem_RowHeight">Row Height</sys:String>
     <sys:String x:Key="SettingsItem_ShowDisplayName">Display Name</sys:String>
     <sys:String x:Key="SettingsItem_ShowEnglishName">English Name</sys:String>
@@ -231,9 +233,11 @@
 
     <!-- Begin changes on 2026/07/25 @ 00:00 UTC  -->
     <!-- A | MsgText_CopyToClipboardFail -->
-    <!-- U | About_BuildDate - Changed 'Build' to 'Commit' -->
-    <!-- U | MsgText_AppUpdateCheckFailed - Added xml:space="preserve" and line break character &#x0a;  -->
     <!-- A | SettingsEnum_Theme_DarkBlue  -->
     <!-- A | SettingsEnum_Theme_LightGray  -->
+    <!-- A | SettingsItem_DarkModeTheme  -->
+    <!-- A | SettingsItem_LightModeTheme  -->
+    <!-- U | About_BuildDate - Changed 'Build' to 'Commit' -->
+    <!-- U | MsgText_AppUpdateCheckFailed - Added xml:space="preserve" and line break character &#x0a;  -->
     <!-- Begin changes on 2026/07/25 @ 00:00 UTC  -->
 </ResourceDictionary>

@@ -21,6 +21,7 @@
     <UserControl.Resources>
         <convert:BooleanInverter x:Key="BoolInverter" />
         <convert:EnumToBooleanConverter x:Key="EnumToBool" />
+        <convert:EnumToVisibilityConverter x:Key="EnumToVisibility" />
     </UserControl.Resources>
     <!--#endregion-->
 
@@ -204,17 +205,22 @@
                         <Grid Grid.Row="0" Grid.Column="1">
                             <!--#region Row & Column definitions-->
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="38" />
-                                <RowDefinition Height="38" />
-                                <RowDefinition Height="38" />
-                                <RowDefinition Height="38" />
-                                <RowDefinition Height="38" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" MinWidth="100" />
                                 <ColumnDefinition Width="10" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
+                            <Grid.DataContext>
+                                <viewmodels:SettingsViewModel />
+                            </Grid.DataContext>
                             <!--#endregion-->
 
                             <Label Grid.Row="0" Grid.Column="0"
@@ -230,41 +236,74 @@
                                                                  Source={x:Static config:UserSettings.Setting}}"
                                           Style="{StaticResource SettingsComboBox}" />
                             </StackPanel>
-
                             <Label Grid.Row="1" Grid.Column="0"
                                    VerticalAlignment="Center"
-                                   Content="{DynamicResource SettingsItem_UISize}" />
+                                   Content="{DynamicResource SettingsItem_LightModeTheme}"
+                                   Visibility="{Binding UITheme,
+                                                        Source={x:Static config:UserSettings.Setting},
+                                                        Converter={StaticResource EnumToVisibility},
+                                                        ConverterParameter={x:Static models:ThemeType.System}}" />
                             <ComboBox Grid.Row="1" Grid.Column="2"
+                                      ItemsSource="{Binding SystemThemeTypes}"
+                                      SelectedItem="{Binding SystemLightTheme,
+                                                             Source={x:Static config:UserSettings.Setting}}"
+                                      Style="{StaticResource SettingsComboBox}"
+                                      Visibility="{Binding UITheme,
+                                                           Source={x:Static config:UserSettings.Setting},
+                                                           Converter={StaticResource EnumToVisibility},
+                                                           ConverterParameter={x:Static models:ThemeType.System}}" />
+
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   VerticalAlignment="Center"
+                                   Content="{DynamicResource SettingsItem_DarkModeTheme}"
+                                   Visibility="{Binding UITheme,
+                                                        Source={x:Static config:UserSettings.Setting},
+                                                        Converter={StaticResource EnumToVisibility},
+                                                        ConverterParameter={x:Static models:ThemeType.System}}" />
+                            <ComboBox Grid.Row="2" Grid.Column="2"
+                                      ItemsSource="{Binding SystemThemeTypes}"
+                                      SelectedItem="{Binding SystemDarkTheme,
+                                                             Source={x:Static config:UserSettings.Setting}}"
+                                      Style="{StaticResource SettingsComboBox}"
+                                      Visibility="{Binding UITheme,
+                                                           Source={x:Static config:UserSettings.Setting},
+                                                           Converter={StaticResource EnumToVisibility},
+                                                           ConverterParameter={x:Static models:ThemeType.System}}" />
+
+                            <Label Grid.Row="3" Grid.Column="0"
+                                   VerticalAlignment="Center"
+                                   Content="{DynamicResource SettingsItem_UISize}" />
+                            <ComboBox Grid.Row="3" Grid.Column="2"
                                       ItemsSource="{Binding Source={convert:EnumBindingSource {x:Type models:MySize}}}"
                                       SelectedItem="{Binding UISize,
                                                              Source={x:Static config:UserSettings.Setting}}"
                                       Style="{StaticResource SettingsComboBox}" />
 
-                            <Label Grid.Row="2" Grid.Column="0"
+                            <Label Grid.Row="4" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Content="{DynamicResource SettingsItem_AccentColor}" />
-                            <ComboBox Grid.Row="2" Grid.Column="2"
+                            <ComboBox Grid.Row="4" Grid.Column="2"
                                       ItemsSource="{Binding Source={convert:EnumBindingSource {x:Type models:AccentColor}}}"
                                       MaxDropDownHeight="300"
                                       SelectedItem="{Binding PrimaryColor,
                                                              Source={x:Static config:UserSettings.Setting}}"
                                       Style="{StaticResource SettingsComboBox}" />
 
-                            <Label Grid.Row="3" Grid.Column="0"
+                            <Label Grid.Row="5" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Content="{DynamicResource SettingsItem_RowHeight}" />
 
-                            <ComboBox Grid.Row="3" Grid.Column="2"
+                            <ComboBox Grid.Row="5" Grid.Column="2"
                                       ItemsSource="{Binding Source={convert:EnumBindingSource {x:Type models:Spacing}}}"
                                       SelectedItem="{Binding RowSpacing,
                                                              Source={x:Static config:UserSettings.Setting}}"
                                       Style="{StaticResource SettingsComboBox}" />
 
-                            <Label Grid.Row="4" Grid.Column="0"
+                            <Label Grid.Row="6" Grid.Column="0"
                                    VerticalAlignment="Center"
                                    Content="Font" />
 
-                            <ComboBox Grid.Row="4" Grid.Column="2"
+                            <ComboBox Grid.Row="6" Grid.Column="2"
                                       ItemsSource="{Binding FontList}"
                                       SelectedValue="{Binding SelectedFont,
                                                               Source={x:Static config:UserSettings.Setting}}"
