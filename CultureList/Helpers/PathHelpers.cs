@@ -26,6 +26,13 @@ internal static class PathHelpers
         {
             return path;
         }
-        return path.Replace(userProfile, "%USERPROFILE%", StringComparison.OrdinalIgnoreCase);
+        int profileLength = userProfile.Length;
+        if (profileLength < path.Length &&
+            path[profileLength] != Path.DirectorySeparatorChar &&
+            path[profileLength] != Path.AltDirectorySeparatorChar)
+        {
+            return path;
+        }
+        return "%USERPROFILE%" + path[profileLength..];
     }
 }
