@@ -99,7 +99,7 @@ public partial class App : Application
             Resources.MergedDictionaries.Add(resDict);
             LanguageStrings = resDict.Count;
             LanguageFile = resDict.Source.OriginalString;
-            _log.Debug($"{LanguageStrings} strings loaded from {LanguageFile}");
+            _log.Debug($"{LanguageStrings} strings loaded from {PathHelpers.AnonymizePath(LanguageFile)}");
         }
         else
         {

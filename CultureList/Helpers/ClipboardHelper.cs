@@ -1,31 +1,52 @@
 ﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
-using static Vanara.PInvoke.User32;
-
 namespace CultureList.Helpers;
 
 internal static class ClipboardHelper
 {
     #region Copy text to clipboard
-    private const uint _const_CF_UNICODETEXT = 13;
-
     /// <summary>
-    /// Copies text to clipboard using Vanara PInvoke instead of DllImport
+    /// Copy to clipboard with retry logic to handle potential exceptions when the clipboard is busy.
     /// </summary>
-    /// <param name="text">Text to be placed in the Windows clipboard</param>
-    public static bool CopyTextToClipboard(string text)
+    public static async Task<bool> CopyTextToClipboardAsync(string? text, int maxRetries = 10, int delayMs = 50)
     {
-        if (!OpenClipboard(IntPtr.Zero) || text.Length < 1)
+        if (string.IsNullOrEmpty(text) || maxRetries <= 0)
         {
             return false;
         }
 
-        IntPtr global = Marshal.StringToHGlobalUni(text);
+        var dispatcher = Application.Current?.Dispatcher;
+        if (dispatcher is null)
+        {
+            return false;
+        }
 
-        _ = SetClipboardData(_const_CF_UNICODETEXT, global);
-        _ = CloseClipboard();
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            try
+            {
+                if (dispatcher.CheckAccess())
+                {
+                    Clipboard.SetText(text);
+                }
+                else
+                {
+                    await dispatcher.InvokeAsync(() => Clipboard.SetText(text));
+                }
 
-        return true;
+                return true;
+            }
+            catch (ExternalException) when (attempt < maxRetries)
+            {
+                await Task.Delay(delayMs).ConfigureAwait(false);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        return false;
     }
     #endregion Copy text to clipboard
 }

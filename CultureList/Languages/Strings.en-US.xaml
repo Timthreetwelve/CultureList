@@ -15,14 +15,14 @@
 
         Translation contributed by:  Timthreetwelve
 
-        Date last update:            2024-07-27
+        Date last update:            See change log below
 
         ======================================================================
 
     -->
 
     <!--  About Page  -->
-    <sys:String x:Key="About_BuildDate">Build Date</sys:String>
+    <sys:String x:Key="About_BuildDate">Commit Date</sys:String>
     <sys:String x:Key="About_CommitID">Commit ID</sys:String>
     <sys:String x:Key="About_CommitIDToolTip">Full Commit ID:</sys:String>
     <sys:String x:Key="About_Contribute">Contribute a Translation</sys:String>
@@ -97,7 +97,7 @@
     <!--  Text found in messages (log, message box, status bar, details area, etc.)  -->
     <sys:String x:Key="MsgText_ApplicationShutdown">is shutting down</sys:String>
     <sys:String x:Key="MsgText_ApplicationStarting">is starting up</sys:String>
-    <sys:String x:Key="MsgText_AppUpdateCheckFailed">Check for update failed. See the log for more information.</sys:String>
+    <sys:String x:Key="MsgText_AppUpdateCheckFailed" xml:space="preserve">Check for update failed.&#x0a;See the log for more information.</sys:String>
     <sys:String x:Key="MsgText_AppUpdateChecking">Checking for update.</sys:String>
     <sys:String x:Key="MsgText_AppUpdateCloseApp">Clicking 'Yes' will close Culture List.</sys:String>
     <sys:String x:Key="MsgText_AppUpdateGoToRelease">Do you want to go to the release page?</sys:String>
@@ -105,6 +105,7 @@
     <sys:String x:Key="MsgText_AppUpdateNoneFound">No newer releases were found.</sys:String>
     <sys:String x:Key="MsgText_AppUpdateTagNotFound">Release tag was not found.</sys:String>
     <sys:String x:Key="MsgText_CopiedToClipboardItem">Item was copied to the clipboard</sys:String>
+    <sys:String x:Key="MsgText_CopyToClipboardFail">Copy to clipboard failed</sys:String>
     <sys:String x:Key="MsgText_CopyToolTip">Copy any value on this page by right-clicking on the text.</sys:String>
     <sys:String x:Key="MsgText_CulturesToolTip">Change displayed cultures in Application Settings.</sys:String>
     <sys:String x:Key="MsgText_ElapsedTime">Elapsed time</sys:String>
@@ -173,17 +174,21 @@
     <sys:String x:Key="SettingsEnum_Spacing_Wide">Wide</sys:String>
     <sys:String x:Key="SettingsEnum_Theme_Dark">Material Dark</sys:String>
     <sys:String x:Key="SettingsEnum_Theme_Darker">Darker</sys:String>
+    <sys:String x:Key="SettingsEnum_Theme_DarkBlue">Midnight Blue</sys:String>
     <sys:String x:Key="SettingsEnum_Theme_Light">Light</sys:String>
+    <sys:String x:Key="SettingsEnum_Theme_LightGray">Pale Graphite</sys:String>
     <sys:String x:Key="SettingsEnum_Theme_System">System</sys:String>
     <!--  Settings Page Items  -->
     <sys:String x:Key="SettingsItem_DisplayNameColumn">Name column to show</sys:String>
     <sys:String x:Key="SettingsItem_CulturesToInclude">Cultures to include</sys:String>
     <sys:String x:Key="SettingsItem_AccentColor">Accent Color</sys:String>
     <sys:String x:Key="SettingsItem_ChangingLanguageWarning">Changing Language will cause application to restart!</sys:String>
+    <sys:String x:Key="SettingsItem_DarkModeTheme">Dark Mode Theme</sys:String>
     <sys:String x:Key="SettingsItem_EnableLanguageTesting">Enable language testing</sys:String>
     <sys:String x:Key="SettingsItem_IncludeDebug">Include debug level messages in log file</sys:String>
     <sys:String x:Key="SettingsItem_KeepOnTop">Keep Culture List on top of other windows</sys:String>
     <sys:String x:Key="SettingsItem_Language">Language</sys:String>
+    <sys:String x:Key="SettingsItem_LightModeTheme">Light Mode Theme</sys:String>
     <sys:String x:Key="SettingsItem_RowHeight">Row Height</sys:String>
     <sys:String x:Key="SettingsItem_ShowDisplayName">Display Name</sys:String>
     <sys:String x:Key="SettingsItem_ShowEnglishName">English Name</sys:String>
@@ -225,4 +230,14 @@
     <!-- Begin changes on 2024/07/27 @ 19:25 UTC  -->
     <!-- * | Initial release on GitHub -->
     <!-- End changes on 2024/07/27 @ 19:25 UTC  -->
+
+    <!-- Begin changes on 2026/07/25 @ 00:00 UTC  -->
+    <!-- A | MsgText_CopyToClipboardFail -->
+    <!-- A | SettingsEnum_Theme_DarkBlue  -->
+    <!-- A | SettingsEnum_Theme_LightGray  -->
+    <!-- A | SettingsItem_DarkModeTheme  -->
+    <!-- A | SettingsItem_LightModeTheme  -->
+    <!-- U | About_BuildDate - Changed 'Build' to 'Commit' -->
+    <!-- U | MsgText_AppUpdateCheckFailed - Added xml:space="preserve" and line break character &#x0a;  -->
+    <!-- End changes on 2026/07/25 @ 00:00 UTC  -->
 </ResourceDictionary>

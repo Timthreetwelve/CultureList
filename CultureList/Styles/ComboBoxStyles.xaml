@@ -7,10 +7,12 @@
     <Style TargetType="ComboBox"
            x:Key="SettingsComboBox"
            BasedOn="{StaticResource MaterialDesignComboBox}">
-        <Setter Property="Padding" Value="5" />
+        <Setter Property="Padding" Value="3,0,0,3" />
+        <Setter Property="Height" Value="34" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="0,3,0,0" />
     </Style>
     <!--#endregion-->

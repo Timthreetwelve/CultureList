@@ -63,7 +63,17 @@ public enum ThemeType
     /// Light or Darker theme based on the System theme.
     /// </summary>
     [LocalizedDescription("SettingsEnum_Theme_System")]
-    System = 3
+    System = 3,
+    /// <summary>
+    /// A Dark Blue theme.
+    /// </summary>
+    [LocalizedDescription("SettingsEnum_Theme_DarkBlue")]
+    DarkBlue = 4,
+    /// <summary>
+    /// A Light Gray theme.
+    /// </summary>
+    [LocalizedDescription("SettingsEnum_Theme_LightGray")]
+    LightGray = 5,
 }
 #endregion Theme
 
