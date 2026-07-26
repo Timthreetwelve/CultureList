@@ -25,7 +25,7 @@
   <!-- Set version and prerelease string (if needed) -->
   <PropertyGroup>
     <VersionValidate>true</VersionValidate>
-    <Version>0.4.2</Version>
+    <Version>0.5.0</Version>
     <VersionPrerelease></VersionPrerelease>
   </PropertyGroup>
   
