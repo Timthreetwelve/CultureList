@@ -202,7 +202,7 @@ internal static class MainWindowHelpers
 
         if (mode == ThemeType.System)
         {
-            var systemTheme = GetSystemTheme();
+            string systemTheme = GetSystemTheme();
             mode = systemTheme.Equals("light", StringComparison.OrdinalIgnoreCase)
                 ? UserSettings.Setting!.SystemLightTheme
                 : UserSettings.Setting!.SystemDarkTheme;

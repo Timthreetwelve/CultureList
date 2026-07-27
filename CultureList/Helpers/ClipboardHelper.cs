@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
+using System.Windows.Threading;
+
 namespace CultureList.Helpers;
 
 internal static class ClipboardHelper
@@ -15,7 +17,7 @@ internal static class ClipboardHelper
             return false;
         }
 
-        var dispatcher = Application.Current?.Dispatcher;
+        Dispatcher? dispatcher = Application.Current?.Dispatcher;
         if (dispatcher is null)
         {
             return false;
