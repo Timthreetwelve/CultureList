@@ -10,7 +10,8 @@
 <div align="center">
   
 [![License](https://img.shields.io/badge/license-MIT-seagreen?style=plastic)](https://github.com/Timthreetwelve/CultureList/blob/main/LICENSE.txt)
-[![NET8win](https://img.shields.io/badge/.NET-10.0--Windows-blueviolet?style=plastic)](https://dotnet.microsoft.com/en-us/download) 
+[![x64](https://img.shields.io/badge/platform-Windows_x64-darkblue?style=plastic)](https://www.microsoft.com/en-us/windows/)
+[![NET10](https://img.shields.io/badge/.NET-10-blueviolet?style=plastic)](https://dotnet.microsoft.com/en-us/download) 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Timthreetwelve/CultureList?style=plastic)](https://github.com/Timthreetwelve/CultureList/releases/latest) 
 [![GitHub Release Date](https://img.shields.io/github/release-date/timthreetwelve/CultureList?style=plastic&color=orange)](https://github.com/Timthreetwelve/CultureList/releases/latest) 
 [![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/timthreetwelve/CultureList/latest?style=plastic)](https://github.com/Timthreetwelve/CultureList/commits/main)
