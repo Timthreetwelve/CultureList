@@ -15,6 +15,10 @@
 ;                               GetVersionNumbersString function
 ;                               returns major, minor, build, revision
 ;                               but we want major, minor, build.
+;
+;             MyInfoVersion:    Version string for VersionInfoVersion
+;                               Needed if MyAppVersion is not in the 
+;                               correct format for VersionInfoVersion
 ;----------------------------------------------------------------------
 #define TempDir              GetEnv("TEMP")
 #define IncludeFile          TempDir + "\PubSetup.Temp.iss"
@@ -31,8 +35,7 @@
 #define MyAppName            "Culture List"
 #define MyAppNameNoSpaces    StringChange(MyAppName, " ", "")
 #define MyAppExeName         "CultureList.exe"
-;#define MyAppVersion         GetVersionNumbersString(MySourceDir + "\" + MyAppExeName)
-#define MyInstallerFilename  MyAppNameNoSpaces + "_" + MyAppVersion + "_" + InstallType + "_Setup"
+#define MyInstallerFilename  MyAppNameNoSpaces + "_" + MyAppVersion + InstallType + "_Setup"
 #define MyCompanyName        "T_K"
 #define MyPublisherName      "Tim Kennedy"
 #define StartCopyrightYear   "2024"
@@ -74,7 +77,7 @@ AppPublisher={#MyPublisherName}
 
 VersionInfoDescription={#MyAppName} installer
 VersionInfoProductName={#MyAppName}
-VersionInfoVersion={#MyAppVersion}
+VersionInfoVersion={#MyInfoVersion}
 
 UninstallDisplayName={#MyAppName} {#MyAppVersion}
 UninstallDisplayIcon={app}\{#MyAppExeName}
@@ -97,7 +100,6 @@ DisableStartupPrompt=yes
 DisableWelcomePage=no
 OutputBaseFilename={#MyInstallerFilename}
 OutputDir={#MyOutputDir}
-;OutputManifestFile={#MyAppName}_{#MyAppVersion}_{#InstallType}_FileList.txt
 SetupIconFile={#MySetupIcon}
 SetupLogging=yes
 SolidCompression=no
