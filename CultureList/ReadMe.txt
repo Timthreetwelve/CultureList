@@ -102,8 +102,6 @@ Culture List uses the following packages:
 
     * OctoKit https://github.com/octokit/octokit.net
 
-    * Vanara https://github.com/dahall/vanara
-
     * VersionInfoGenerator https://github.com/notpeelz/VersionInfoGenerator
 
     * Inno Setup was used to create the installer. https://jrsoftware.org/isinfo.php
