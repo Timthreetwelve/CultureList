@@ -43,7 +43,7 @@
   
   <!-- Files to copy -->
   <ItemGroup>
-    <FilesToCopy Include="Content_Files\License.txt;Content_Files\ReadMe.txt;Content_Files\Strings.Test.xaml" />
+    <FilesToCopy Include="Content_Files\LICENSE.txt;Content_Files\Readme.txt;Content_Files\Strings.test.xaml" />
   </ItemGroup>
 
   <!-- NuGet Packages -->
