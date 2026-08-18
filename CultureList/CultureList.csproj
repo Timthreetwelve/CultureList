@@ -81,5 +81,9 @@
     <Message Importance="high" Text="The obj folder has been deleted." />
     <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
   </Target>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="CultureList.Tests" />
+  </ItemGroup>
   
 </Project>
