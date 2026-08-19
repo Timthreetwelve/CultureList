@@ -12,11 +12,6 @@ namespace CultureList.Helpers;
 public static class TextFileViewer
 {
     #region Text file viewer
-    /// <summary>
-    /// Opens specified text file
-    /// </summary>
-    /// <param name="textFile">Full path for text file</param>
-    ///
     public static void ViewTextFile(string textFile)
     {
         string fname = string.Empty;
@@ -25,7 +20,7 @@ public static class TextFileViewer
             fname = PathHelpers.AnonymizePath(textFile);
 
             using Process p = new();
-            p.StartInfo.FileName = textFile;
+            p.StartInfo.FileName = $"\"{textFile}\"";
             p.StartInfo.UseShellExecute = true;
             p.StartInfo.ErrorDialog = false;
             _ = p.Start();
@@ -33,11 +28,37 @@ public static class TextFileViewer
         }
         catch (Win32Exception ex)
         {
-            if (ex.NativeErrorCode == 1155)
+            int ERROR_NO_ASSOCIATION = 1155;
+            if (ex.NativeErrorCode == ERROR_NO_ASSOCIATION)
             {
+                string notepadPath = string.Empty;
+                string system32 = Environment.GetFolderPath(Environment.SpecialFolder.System);
+                string windir = Environment.GetEnvironmentVariable("windir") ?? "C:\\Windows";
+
+                if (File.Exists(Path.Combine(system32, "notepad.exe")))
+                {
+                    notepadPath = Path.Combine(system32, "notepad.exe");
+                }
+                else if (File.Exists(Path.Combine(windir, "notepad.exe")))
+                {
+                    notepadPath = Path.Combine(windir, "notepad.exe");
+                }
+                else
+                {
+                    _log.Error($"Unable to find notepad.exe in {system32} or {windir}");
+#if messagebox
+                    CompositeFormat format = CompositeFormat.Parse(GetStringResource("MsgText_ErrorOpeningFile"));
+                    string msg = string.Format(CultureInfo.InvariantCulture, format, textFile);
+                    _ = MessageBox.Show($"{msg}\n\nUnable to find notepad.exe in {system32} or {windir}",
+                                        GetStringResource("MsgText_Error_Caption"),
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Error);
+#endif
+                    return;
+                }
                 using Process p = new();
-                p.StartInfo.FileName = "notepad.exe";
-                p.StartInfo.Arguments = textFile;
+                p.StartInfo.FileName = notepadPath;
+                p.StartInfo.Arguments = $"\"{textFile}\"";
                 p.StartInfo.UseShellExecute = true;
                 p.StartInfo.ErrorDialog = false;
                 _ = p.Start();
@@ -46,27 +67,27 @@ public static class TextFileViewer
             else
             {
 #if messagebox
-                CompositeFormat format = CompositeFormat.Parse(GetStringResource("MsgText_ErrorReadingFile"));
+                _log.Error(ex, $"Unable to open {fname}");
+                CompositeFormat format = CompositeFormat.Parse(GetStringResource("MsgText_ErrorOpeningFile"));
                 string msg = string.Format(CultureInfo.InvariantCulture, format, textFile);
                 _ = MessageBox.Show($"{msg}\n{ex.Message}",
                                     GetStringResource("MsgText_ErrorCaption"),
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Error);
 #endif
-                _log.Error(ex, $"Unable to open {fname}. {ex.Message}");
             }
         }
         catch (Exception ex)
         {
 #if messagebox
-            CompositeFormat format = CompositeFormat.Parse(GetStringResource("MsgText_ErrorReadingFile"));
+            _log.Error($"Unable to open {fname}. {ex.Message} ");
+            CompositeFormat format = CompositeFormat.Parse(GetStringResource("MsgText_ErrorOpeningFile"));
             string msg = string.Format(CultureInfo.InvariantCulture, format, textFile);
             _ = MessageBox.Show($"{msg}\n{ex.Message}",
                                 GetStringResource("MsgText_ErrorCaption"),
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
 #endif
-            _log.Error(ex, $"Unable to open {fname}. {ex.Message}");
         }
     }
     #endregion Text file viewer
