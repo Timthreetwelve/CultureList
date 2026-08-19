@@ -1,12 +1,9 @@
 ﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
-using System.Windows.Threading;
-
 namespace CultureList.Helpers;
 
 internal static class ClipboardHelper
 {
-    #region Copy text to clipboard
     /// <summary>
     /// Copy to clipboard with retry logic to handle potential exceptions when the clipboard is busy.
     /// </summary>
@@ -50,5 +47,4 @@ internal static class ClipboardHelper
 
         return false;
     }
-    #endregion Copy text to clipboard
 }

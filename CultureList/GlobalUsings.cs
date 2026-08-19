@@ -9,7 +9,6 @@ global using System.IO;
 global using System.Linq;
 global using System.Reflection;
 global using System.Runtime.InteropServices;
-global using System.Runtime.Versioning;
 global using System.Security.Principal;
 global using System.Text;
 global using System.Text.Json;
@@ -21,6 +20,7 @@ global using System.Windows.Data;
 global using System.Windows.Input;
 global using System.Windows.Media;
 global using System.Windows.Markup;
+global using System.Windows.Threading;
 
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
