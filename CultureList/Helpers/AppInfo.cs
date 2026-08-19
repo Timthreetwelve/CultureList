@@ -8,6 +8,23 @@ namespace CultureList.Helpers;
 public static class AppInfo
 {
     /// <summary>
+    /// Returns the process architecture e.g. x64, Arm64, etc.
+    /// </summary>
+    public static string Architecture
+    {
+        get
+        {
+            field = RuntimeInformation.ProcessArchitecture.ToString();
+            return field.ToLowerInvariant() switch
+            {
+                "x64" => "x64",
+                "x86" => "x86",
+                _ => field
+            };
+        }
+    }
+
+    /// <summary>
     /// Returns the Copyright info from the Assembly info
     /// </summary>
     public static string AppCopyright => FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly()!.Location).LegalCopyright ?? "missing";
@@ -20,7 +37,7 @@ public static class AppInfo
     /// <summary>
     /// Returns the app's name without the extension
     /// </summary>
-    public static string AppName => Assembly.GetEntryAssembly()!.GetName().Name ?? "missing";
+    public static string AppName => (Assembly.GetEntryAssembly()!.GetName().Name) ?? "missing";
 
     /// <summary>
     /// Returns the app's full path including the EXE name
@@ -40,17 +57,13 @@ public static class AppInfo
     /// <summary>
     /// Returns the product version from the Assembly info
     /// </summary>
+    // Used in About window XAML tooltip: Views/AboutPage.xaml.
     public static string AppProductVersion => FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly()!.Location).ProductVersion ?? "missing";
 
     /// <summary>
     /// Returns the full version number as Version
     /// </summary>
     public static Version AppVersionVer => Assembly.GetEntryAssembly()!.GetName().Version!;
-
-    /// <summary>
-    /// Returns the process architecture e.g. X64, Arm64, etc.
-    /// </summary>
-    public static string Architecture => RuntimeInformation.ProcessArchitecture.ToString().ToLowerInvariant();
 
     /// <summary>
     /// True if running as administrator
