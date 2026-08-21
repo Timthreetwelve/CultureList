@@ -21,4 +21,8 @@
     <ProjectReference Include="..\CultureList\CultureList.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="Microsoft.Testing.Extensions.CodeCoverage" Version="18.10.0" />
+  </ItemGroup>
+
 </Project>
