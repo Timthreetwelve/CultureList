@@ -150,47 +150,36 @@ public partial class App : Application
 
     #region Unhandled Exception Handler
     /// <summary>
-    /// Handles any exceptions that weren't caught by a try-catch statement.
+    /// Handles any exceptions that weren't caught elsewhere.
     /// </summary>
     /// <remarks>
     /// This uses default message box.
     /// </remarks>
     private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs args)
     {
-        if (args.ExceptionObject is Exception e)
+        if (args.ExceptionObject is Exception exception)
         {
-            _log.Error($"Exception message: {e.Message}");
-            if (e.InnerException != null)
-            {
-                _log.Error(e.InnerException, $"Inner Exception: {e.InnerException.Message}");
-            }
-            else
-            {
-                _log.Error("Inner exception not available.");
-            }
+            _log.Fatal(exception, "Unhandled exception.");
 
-            if (e.StackTrace != null)
-            {
-                _log.Error("StackTrace follows:");
-                _log.Error(e.StackTrace);
-            }
-            else
-            {
-                _log.Error("StackTrace not available.");
-            }
-
-            string msg = string.Format(CultureInfo.CurrentCulture,
-                                       $"MsgText_Error\n{e.Message}\nMsgText_Error_SeeLog");
+            string msg = string.IsNullOrWhiteSpace(exception.Message)
+                ? GetStringResource("MsgText_Error")
+                : exception.Message;
+            msg += $"\n\n{GetStringResource("MsgText_Error_SeeLog")}";
 
             ShowMessageBox(msg);
-            _log.Fatal("Application cannot continue.");
         }
         else
         {
-            string t = args.ExceptionObject.GetType().FullName ?? "null";
-            _log.Error($"Unhandled exception object is not of type Exception. Type: {t}");
-            string msg = string.Format(CultureInfo.CurrentCulture,
-                                       "MsgText_Error\nMsgText_Error_SeeLog");
+            if (args.ExceptionObject == null)
+            {
+                _log.Error("Unhandled exception object is null.");
+            }
+            else
+            {
+                _log.Error("Unhandled exception object is not of type Exception. Type: {ExceptionType}", args.ExceptionObject.GetType().FullName);
+            }
+
+            string msg = $"{GetStringResource("MsgText_Error")}\n\n{GetStringResource("MsgText_Error_SeeLog")}";
             ShowMessageBox(msg);
         }
     }
@@ -220,7 +209,7 @@ public partial class App : Application
         if ((Current.Dispatcher?.CheckAccess()) == true || Current.Dispatcher == null)
         {
             _ = MessageBox.Show(msg,
-                "MsgText_Error_Caption",
+                GetStringResource("MsgText_ErrorCaption"),
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
         }
@@ -228,7 +217,7 @@ public partial class App : Application
         {
             Current.Dispatcher.Invoke(() =>
                 MessageBox.Show(msg,
-                    "MsgText_Error_Caption",
+                    GetStringResource("MsgText_ErrorCaption"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Error));
         }
