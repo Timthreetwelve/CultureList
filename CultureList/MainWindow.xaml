@@ -214,13 +214,7 @@
               Grid.Column="1"
               Background="{DynamicResource MaterialDesign.Brush.Card.Background}">
             <ContentControl Content="{Binding CurrentViewModel}" />
-            <!--  Having the right mouse button here makes more sense that the window  -->
-            <bh:Interaction.Triggers>
-                <bh:EventTrigger EventName="MouseRightButtonUp">
-                    <bh:InvokeCommandAction Command="{Binding RightMouseUpCommand}"
-                                            PassEventArgsToCommand="True" />
-                </bh:EventTrigger>
-            </bh:Interaction.Triggers>
+
         </Grid>
         <!--#endregion-->
     </Grid>

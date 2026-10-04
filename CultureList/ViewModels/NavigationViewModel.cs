@@ -130,6 +130,38 @@ internal sealed partial class NavigationViewModel : ObservableObject
     }
     #endregion Check for new release
 
+    #region Copy DataGrid cell value
+    /// <summary>
+    /// Copy a DataGrid cell value to clipboard.
+    /// </summary>
+    [RelayCommand]
+    public static async Task CopyCellValue(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return;
+        }
+
+        try
+        {
+            if (await ClipboardHelper.CopyTextToClipboardAsync(text))
+            {
+                SnackbarMsg.ClearAndQueueMessage(GetStringResource("MsgText_CopiedToClipboardItem"));
+                _log.Debug($"{text.Length} bytes copied to the clipboard");
+            }
+            else
+            {
+                _log.Error("CopyCellValue clipboard copy failed.");
+                SnackbarMsg.ClearAndQueueMessage(GetStringResource("MsgText_CopyToClipboardFail"));
+            }
+        }
+        catch (Exception ex)
+        {
+            _log.Error(ex, $"Copy cell value command failed. {ex.Message}");
+        }
+    }
+    #endregion Copy DataGrid cell value
+
     #region Right mouse button
     /// <summary>
     /// Copy any text in a TextBlock to the clipboard on right mouse button up.

@@ -7,6 +7,7 @@
              xmlns:global="clr-namespace:System.Globalization;assembly=mscorlib"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="clr-namespace:CultureList.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}">
@@ -33,7 +34,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="500" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <!--#endregion-->
@@ -69,12 +70,34 @@
                 <DataGridTextColumn Binding="{Binding Name}"
                                     MinWidth="130"
                                     Header="{DynamicResource DataGridHeader_Code}" />
-                <DataGridTextColumn Binding="{Binding DisplayName}"
-                                    MinWidth="400"
-                                    Header="{DynamicResource DataGridHeader_DisplayName}"
-                                    Visibility="{Binding ShowDisplayName,
-                                                         Source={x:Static config:UserSettings.Setting},
-                                                         Converter={StaticResource BoolToVisConverter}}" />
+                <DataGridTemplateColumn Width="Auto"
+                                        Header="{DynamicResource DataGridHeader_DisplayName}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding DisplayName}" />
+                                <Button Width="20" Height="18"
+                                        Margin="15,0,5,0" Padding="0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Command="{Binding DataContext.CopyCellValueCommand,
+                                                          RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                        CommandParameter="{Binding DisplayName}"
+                                        Content="&#xE8C8;"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
+                                        Opacity="0.75"
+                                        Style="{DynamicResource MaterialDesignPaperButton}"
+                                        Visibility="{Binding IsMouseOver,
+                                                             RelativeSource={RelativeSource AncestorType=DataGridRow},
+                                                             Converter={StaticResource BoolToVisConverter}}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
                 <DataGridTextColumn Binding="{Binding NativeName}"
                                     MinWidth="400"
                                     CellStyle="{StaticResource RightToLeftCell}"
