@@ -5,8 +5,4 @@
   <Project Path="CultureList/CultureList.csproj">
     <Platform Project="x64" />
   </Project>
-  <Project Path="CultureList.Tests/CultureList.Tests.csproj"
-           Id="59edc078-9cff-4d1f-a4bb-835ff41c3ac8">
-    <Platform Project="x64" />
-  </Project>
 </Solution>
