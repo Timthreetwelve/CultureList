@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
-namespace CultureList;
+namespace CultureList.Helpers;
 
 /// <summary>
 /// BuildInfo class provides information about the build, including commit ID, commit date, and version string.
