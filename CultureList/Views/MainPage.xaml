@@ -70,33 +70,13 @@
                 <DataGridTextColumn Binding="{Binding Name}"
                                     MinWidth="130"
                                     Header="{DynamicResource DataGridHeader_Code}" />
-                <DataGridTemplateColumn Width="Auto"
-                                        Header="{DynamicResource DataGridHeader_DisplayName}">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding DisplayName}" />
-                                <Button Width="20" Height="18"
-                                        Margin="15,0,5,0" Padding="0"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Center"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        Command="{Binding DataContext.CopyCellValueCommand,
-                                                          RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                        CommandParameter="{Binding DisplayName}"
-                                        Content="&#xE8C8;"
-                                        FontFamily="Segoe MDL2 Assets"
-                                        Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
-                                        Opacity="0.75"
-                                        Style="{DynamicResource MaterialDesignPaperButton}"
-                                        Visibility="{Binding IsMouseOver,
-                                                             RelativeSource={RelativeSource AncestorType=DataGridRow},
-                                                             Converter={StaticResource BoolToVisConverter}}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+
+                <DataGridTextColumn MinWidth="400"
+                                     Binding="{Binding DisplayName}"
+                                    Header="{DynamicResource DataGridHeader_DisplayName}"
+                                    Visibility="{Binding ShowDisplayName,
+                                                         Source={x:Static config:UserSettings.Setting},
+                                                         Converter={StaticResource BoolToVisConverter}}" />
 
                 <DataGridTextColumn Binding="{Binding NativeName}"
                                     MinWidth="400"
@@ -105,6 +85,7 @@
                                     Visibility="{Binding ShowNativeName,
                                                          Source={x:Static config:UserSettings.Setting},
                                                          Converter={StaticResource BoolToVisConverter}}" />
+
                 <DataGridTextColumn Binding="{Binding EnglishName}"
                                     MinWidth="400"
                                     Header="{DynamicResource DataGridHeader_EnglishName}"
