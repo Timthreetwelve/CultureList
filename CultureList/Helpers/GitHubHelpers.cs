@@ -111,13 +111,13 @@ internal static class GitHubHelpers
         {
             ExceptionText = ex.Message;
             _log.Error(ex, "Release not found on GitHub.");
-            return null!;
+            return null;
         }
         catch (Exception ex)
         {
             ExceptionText = ex.Message;
             _log.Error(ex, "Get latest release from GitHub failed.");
-            return null!;
+            return null;
         }
     }
     #endregion Get latest release

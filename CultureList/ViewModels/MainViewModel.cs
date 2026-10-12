@@ -23,7 +23,7 @@ internal sealed class MainViewModel
     /// </summary>
     internal static void LoadData()
     {
-        CultureTypes types = CheckCultureType(UserSettings.Setting!.SelectedCultures);
+        CultureTypes types = CheckCultureType(UserSettings.Setting.SelectedCultures);
         Cultures = new List<CultureInfo>([.. CultureInfo.GetCultures(types).OrderBy(static x => x.Name)]);
         MainPage.Instance?.CultureGrid.ItemsSource = Cultures;
         _log.Debug($"Loaded {Cultures.Count} {UserSettings.Setting.SelectedCultures} items.");
@@ -50,7 +50,7 @@ internal sealed class MainViewModel
             case Models.Cultures.AllCultures:
                 return (CultureTypes)culture;
             default:
-                UserSettings.Setting!.SelectedCultures = (Cultures)CultureTypes.AllCultures;
+                UserSettings.Setting.SelectedCultures = (Cultures)CultureTypes.AllCultures;
                 return CultureTypes.AllCultures;
         }
     }

@@ -31,7 +31,7 @@ public static class SettingChange
                 break;
 
             case nameof(UserSettings.Setting.UISize):
-                MainWindowHelpers.UIScale(UserSettings.Setting!.UISize);
+                MainWindowHelpers.UIScale(UserSettings.Setting.UISize);
                 break;
 
             case nameof(UserSettings.Setting.LanguageTesting):
@@ -47,7 +47,7 @@ public static class SettingChange
 
             case nameof(UserSettings.Setting.SystemLightTheme):
             case nameof(UserSettings.Setting.SystemDarkTheme):
-                if (UserSettings.Setting!.UITheme == ThemeType.System)
+                if (UserSettings.Setting.UITheme == ThemeType.System)
                 {
                     MainWindowHelpers.SetBaseTheme(ThemeType.System);
                 }
