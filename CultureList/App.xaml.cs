@@ -57,7 +57,7 @@ public partial class App : Application
             string currentLanguage = Thread.CurrentThread.CurrentCulture.Name;
 
             // If option to use OS language is true and it exists in the list of defined languages, use it but do not change current culture.
-            if (UserSettings.Setting!.UseOSLanguage &&
+            if (UserSettings.Setting.UseOSLanguage &&
                 UILanguage.DefinedLanguages.Exists(x => x.LanguageCode == currentLanguage))
             {
                 resDict.Source = new Uri($"Languages/Strings.{currentLanguage}.xaml", UriKind.RelativeOrAbsolute);
@@ -113,7 +113,7 @@ public partial class App : Application
     #region Language testing
     private void CheckLanguageTesting()
     {
-        if (UserSettings.Setting!.LanguageTesting)
+        if (UserSettings.Setting.LanguageTesting)
         {
             _log.Info("Language testing enabled");
             ResourceDictionary testDict = [];
