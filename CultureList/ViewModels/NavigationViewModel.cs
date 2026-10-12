@@ -260,7 +260,7 @@ internal sealed partial class NavigationViewModel : ObservableObject
 
             case (ModifierKeys.Control, Key.N, _):
                 e.Handled = true;
-                if (UserSettings.Setting!.ShowDisplayName)
+                if (UserSettings.Setting.ShowDisplayName)
                 {
                     UserSettings.Setting.ShowDisplayName = false;
                     UserSettings.Setting.ShowNativeName = true;
@@ -279,7 +279,7 @@ internal sealed partial class NavigationViewModel : ObservableObject
 
             case (ModifierKeys.Control, Key.L, _):
                 {
-                    if (UserSettings.Setting!.SelectedCultures == Cultures.AllCultures)
+                    if (UserSettings.Setting.SelectedCultures == Cultures.AllCultures)
                     {
                         UserSettings.Setting.SelectedCultures = Cultures.NeutralCultures;
                     }
