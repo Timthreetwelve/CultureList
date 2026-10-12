@@ -67,6 +67,30 @@ internal static class ResourceHelpers
     }
     #endregion Get a resource string
 
+    #region Get composite format for a resource string
+    private static CompositeFormat GetCompositeResource(string key)
+    {
+        try
+        {
+            return CompositeFormat.Parse(GetStringResource(key));
+        }
+        catch (Exception ex)
+        {
+            _log.Error(ex, $"Error creating composite format for key: {key}");
+            return CompositeFormat.Parse($"Error creating composite format for key: {key}");
+        }
+    }
+    #endregion Get composite format for a resource string
+
+    #region Composite format properties
+    internal static CompositeFormat MsgTextAppUpdateNewerFound { get; } = GetCompositeResource("MsgText_AppUpdateNewerFound");
+    internal static CompositeFormat MsgTextErrorOpeningFile { get; } = GetCompositeResource("MsgText_ErrorOpeningFile");
+    internal static CompositeFormat MsgTextFilterRowsShown { get; } = GetCompositeResource("MsgText_FilterRowsShown");
+    internal static CompositeFormat MsgTextUIColorSet { get; } = GetCompositeResource("MsgText_UIColorSet");
+    internal static CompositeFormat MsgTextUISizeSet { get; } = GetCompositeResource("MsgText_UISizeSet");
+    internal static CompositeFormat MsgTextUIThemeSet { get; } = GetCompositeResource("MsgText_UIThemeSet");
+    #endregion Composite format properties
+
     #region Compute percentage of language strings
     /// <summary>
     /// Compute percentage of strings by dividing the number of strings
@@ -84,12 +108,12 @@ internal static class ResourceHelpers
             if (totalCount == 0)
             {
                 _log.Error("GetLanguagePercent totalCount is 0 for default dictionary");
-                return GetStringResource("MsgText_Error_Caption");
+                return GetStringResource("MsgText_ErrorCaption");
             }
             if (dictionary.Count == 0)
             {
                 _log.Error($"GetLanguagePercent Count is 0 for {dictionary.Source}");
-                return GetStringResource("MsgText_Error_Caption");
+                return GetStringResource("MsgText_ErrorCaption");
             }
             double percent = (double)dictionary.Count / totalCount;
             percent = Math.Min(percent, 1.0);  // Cap at 100%
@@ -99,12 +123,15 @@ internal static class ResourceHelpers
         catch (IOException ex)
         {
             _log.Error(ex, $"IO exception in GetLanguagePercent for {dictionary.Source}");
-            return GetStringResource("MsgText_Error_Caption");
+            return GetStringResource("MsgText_ErrorCaption");
         }
         catch (Exception ex)
         {
-            _log.Error(ex, $"Error in GetLanguagePercent for {dictionary.Source}");
-            return GetStringResource("MsgText_Error_Caption");
+            _log.Error(ex,
+                ex.InnerException != null
+                    ? $"Error in GetLanguagePercent for {dictionary.Source}\n{ex.InnerException}\n"
+                    : $"Error in GetLanguagePercent for {dictionary.Source}");
+            return GetStringResource("MsgText_ErrorCaption");
         }
     }
     #endregion Compute percentage of language strings
