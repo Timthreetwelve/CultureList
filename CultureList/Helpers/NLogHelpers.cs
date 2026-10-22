@@ -24,7 +24,25 @@ internal static class NLogHelpers
     /// <param name="newfile">True to start with new _log file. False to append to current file.</param>
     public static void NLogConfig(bool newfile)
     {
+        // throw exceptions on configuration errors
+        LogManager.ThrowConfigExceptions = true;
+
+        // create a new configuration
         LoggingConfiguration config = new();
+
+        // create custom layout for the _log file
+        string stdLayout = "${date:format=yyyy/MM/dd HH\\:mm\\:ss.ff} " +
+                        "${pad:padding=-5:inner=${level:uppercase=true}}  " +
+                        "${message}";
+
+        string errLayout = "${date:format=yyyy/MM/dd HH\\:mm\\:ss.ff} " +
+                        "${pad:padding=-5:inner=${level:uppercase=true}}  " +
+                        "${message}  " +
+                        "[${callsite:className=true:includeNamespace=false:fileName=false:methodName=true}\\:${callsite-lineNumber}]" +
+                        "[${threadid}]" +
+                        "${onexception:${newline}${exception:format=tostring}}";
+
+        string thisLayout = "${when:when=level<=LogLevel.Info:inner=" + stdLayout + ":else=" + errLayout + "}";
 
         // create _log file Target for NLog
         FileTarget logfile = new()
@@ -39,10 +57,8 @@ internal static class NLogHelpers
             FileName = CreateFilename(),
 
             // message and footer layouts
-            Footer = "${date:format=yyyy/MM/dd HH\\:mm\\:ss}",
-            Layout = "${date:format=yyyy/MM/dd HH\\:mm\\:ss} " +
-                         "${pad:padding=-5:inner=${level:uppercase=true}}  " +
-                         "${message}${onexception:${newline}${exception:format=tostring}}"
+            Footer = "${date:format=yyyy/MM/dd HH\\:mm\\:ss.ff}",
+            Layout = thisLayout
         };
 
         // add the _log file target
